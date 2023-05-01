@@ -27,9 +27,19 @@ async function testCollection() {
 /* -------------------------------------------------------------------------- */
 // Get Users (for testing purposes)
 router.get("/", async (req, res) => {
+  console.log("Received a request to /api");
   const testing = await testCollection();
-  // Send the array of users as the response
-  res.send(await testing.find({}).toArray());
+  testing
+    .find({})
+    .toArray()
+    .then((data) => {
+      console.log("Sending data:", data);
+      res.send(data);
+    })
+    .catch((err) => {
+      console.log("Error fetching data:", err);
+      res.status(500).send(err);
+    });
 });
 
 /* -------------------------------------------------------------------------- */

@@ -33,6 +33,6 @@ app.use("/testing", testing);
 /*                    Setting port for the server to run on                   */
 /* -------------------------------------------------------------------------- */
 // Setting the port for the server, either from the environment variable or defaulting to 3000
-const port = process.env.PORT || 27018;
+const port = 4000;
 // Starting the server and listening for incoming connections on the specified port
 app.listen(port, () => console.log(`Server started on port ${port}`));

@@ -1,1 +1,7 @@
 <monthly-goals-form></monthly-goals-form>
+
+<!-- Evt goal.status -->
+<div class="bg-indigo-800 p-12" *ngFor="let goal of goals">
+  {{ goal.title }} {{ goal.category }} {{ goal.priority }} <br /><br />
+  {{ goal.description }}
+</div>

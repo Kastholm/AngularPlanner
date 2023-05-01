@@ -11,23 +11,22 @@ const mongodb = require("mongodb");
 const router = express.Router();
 
 /* -------------------------------------------------------------------------- */
-/*            Connection to MongoDB Database and collection "users"           */
+/*            Connection to MongoDB Database and collection "months"           */
 /* -------------------------------------------------------------------------- */
 async function testCollection() {
   // Get the connection string from the .env file
   const client = await mongodb.MongoClient.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
   });
-  // Return the collection "users"
-  return client.db("testDatabase").collection("testCollection");
+  // Return the collection "goals"
+  return client.db("months").collection("goals");
 }
 
 /* -------------------------------------------------------------------------- */
 /*                  Routes for the API calls to the database                  */
 /* -------------------------------------------------------------------------- */
-// Get Users (for testing purposes)
+// Get months (for testing purposes)
 router.get("/", async (req, res) => {
-  console.log("Received a request to /api");
   const testing = await testCollection();
   testing
     .find({})

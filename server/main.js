@@ -25,9 +25,9 @@ app.use(
   })
 );
 
-const testing = require("./routes/testing");
+const goals = require("./routes/goals");
 //url call
-app.use("/testing", testing);
+app.use("/goals", goals);
 
 /* -------------------------------------------------------------------------- */
 /*                    Setting port for the server to run on                   */

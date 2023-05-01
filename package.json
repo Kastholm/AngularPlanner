@@ -12,7 +12,8 @@
     "endWin": "node commands/end-push-commit.js",
     "preinit": "npm i dotenv && node commands/preinit.js",
     "init": "git init && git add . && git commit -m 'Initialising' && git branch -M main",
-    "postinit": "git remote add origin https://github.com/Kastholm/AngularPlanner.git && git push --set-upstream origin main"
+    "postinit": "git remote add origin https://github.com/Kastholm/AngularPlanner.git && git push --set-upstream origin main",
+    "netlify": "ng build && netlify login && netlify init && netlify deploy"
   },
   "private": true,
   "dependencies": {

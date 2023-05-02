@@ -1,27 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { MonthapiService } from '../../monthapi.service';
+/* import { RoutingService } from '../routing.service'; */
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'goals',
   templateUrl: './goals.component.html',
   styleUrls: ['./goals.component.scss'],
 })
-export class GoalsComponent {
+export class GoalsComponent implements OnInit {
   monthdata: any = [];
-  
-
-  //Public
-  /* constructor(private http: HttpClient) {
-    this.http.get('http://192.168.87.155:27019/monthdata').subscribe((monthdata) => {
-      console.log(monthdata);
-      this.monthdata = monthdata;
+  monthChosen: any;
+  constructor(
+    private monthApi: MonthapiService,
+    private route: ActivatedRoute
+    /* private routing: RoutingService */
+  ) {
+    //instance of ActivatedRoute, it contains information about the currently activated route associated with a component
+    //params is an Observable that emits a new value whenever the route parameters change
+    //When you subscribe to an Observable, you provide a callback function that will be executed every time the Observable emits a new value. In this case, the callback function takes a single argument params, which is an object containing the route parameters.
+     this.route.params.subscribe((params) => {
+      //access the month parameter from the params object
+      this.monthChosen = params['month'];
     });
-  } */
+  }
 
-  //Local
-  constructor(private http: HttpClient) {
-    this.http.get('http://localhost:4000/monthdata').subscribe((monthdata) => {
-      console.log(monthdata);
-      this.monthdata = monthdata;
+  ngOnInit() {
+    //get api data
+    this.monthApi.fetchMonthData().subscribe((data) => {
+      //set data
+      this.monthApi.setMonthData(data);
+      //get data
+      this.monthdata = this.monthApi.getMonthData();
     });
+    //get the route parameter service
+    /* this.routing.getCurrentMonth().subscribe((month) => {
+      this.monthChosen = month;
+    }); */
+    
   }
 }

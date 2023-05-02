@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { MonthapiService } from '../monthapi.service';
 
 @Component({
   selector: 'left-panel',
@@ -9,19 +9,12 @@ import { HttpClient } from '@angular/common/http';
 export class LeftPanelComponent {
   monthdata: any = [];
 
-  //Public
-  /* constructor(private http: HttpClient) {
-    this.http.get('http://192.168.87.155:27019/monthdata').subscribe((monthdata) => {
-      console.log(monthdata);
-      this.monthdata = monthdata;
-    });
-  } */
+  constructor(private monthApi: MonthapiService) {}
 
-  //Local
-  constructor(private http: HttpClient) {
-    this.http.get('http://localhost:4000/monthdata').subscribe((monthdata) => {
-      console.log(monthdata);
-      this.monthdata = monthdata;
+  ngOnInit() {
+    this.monthApi.fetchMonthData().subscribe((data) => {
+      this.monthApi.setMonthData(data);
+      this.monthdata = this.monthApi.getMonthData();
     });
   }
 }

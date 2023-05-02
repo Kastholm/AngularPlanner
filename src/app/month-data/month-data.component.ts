@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 @Component({
-  selector: 'app-month-data',
+  selector: 'month-data',
   templateUrl: './month-data.component.html',
-  styleUrls: ['./month-data.component.scss']
+  styleUrls: ['./month-data.component.scss'],
 })
-export class MonthDataComponent {
+export class MonthDataComponent implements OnInit {
+  month: any;
 
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.month = {
+      month: this.route.snapshot.params['month'],
+    };
+  }
 }

@@ -14,7 +14,7 @@ import { CompletedComponent } from './month-data/completed/completed.component';
 import { GoalFormComponent } from './month-data/goals/goal-form/goal-form.component';
 import { NoteFormComponent } from './month-data/notes/note-form/note-form.component';
 
-const appRoutes: Routes = [{ path: 'goals', component: MonthDataComponent }];
+const appRoutes: Routes = [{ path: 'goals/:month', component: MonthDataComponent }];
 
 @NgModule({
   declarations: [

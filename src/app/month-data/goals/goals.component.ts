@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'goals',
@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GoalsComponent {
   monthdata: any = [];
+  
 
   //Public
   /* constructor(private http: HttpClient) {

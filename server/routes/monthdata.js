@@ -19,7 +19,7 @@ async function testCollection() {
     useNewUrlParser: true,
   });
   // Return the collection "goals"
-  return client.db("months").collection("goals");
+  return client.db("monthplanner").collection("months");
 }
 
 /* -------------------------------------------------------------------------- */

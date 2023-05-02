@@ -25,9 +25,9 @@ app.use(
   })
 );
 
-const goals = require("./routes/goals");
+const monthdata = require("./routes/monthdata");
 //url call
-app.use("/goals", goals);
+app.use("/monthdata", monthdata);
 
 /* -------------------------------------------------------------------------- */
 /*                    Setting port for the server to run on                   */

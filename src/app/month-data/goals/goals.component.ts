@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 @Component({
-  selector: 'left-panel',
-  templateUrl: './left-panel.component.html',
-  styleUrls: ['./left-panel.component.scss'],
+  selector: 'goals',
+  templateUrl: './goals.component.html',
+  styleUrls: ['./goals.component.scss'],
 })
-export class LeftPanelComponent {
+export class GoalsComponent {
   monthdata: any = [];
 
   //Public

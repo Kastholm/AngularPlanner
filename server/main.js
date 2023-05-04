@@ -25,6 +25,9 @@ app.use(
   })
 );
 
+// express.json() middleware to parse JSON requests
+app.use(express.json());
+
 const monthdata = require("./routes/monthdata");
 //url call
 app.use("/monthdata", monthdata);

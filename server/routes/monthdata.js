@@ -41,6 +41,30 @@ router.get("/", async (req, res) => {
     });
 });
 
+// POST a new month with subcollections
+router.post("/addMonth", async (req, res) => {
+  const monthName = req.body.name;
+  const newMonth = {
+    name: monthName,
+    goals: [],
+    learned: [],
+    made: [],
+    notes: [],
+  };
+
+  try {
+    //get data
+    const monthsCollection = await testCollection();
+    //insert data
+    await monthsCollection.insertOne(newMonth);
+    //resopnse
+    res.status(201).send({ message: "New month added successfully" });
+  } catch (err) {
+    console.log("Error adding new month:", err);
+    res.status(500).send(err);
+  }
+});
+
 /* -------------------------------------------------------------------------- */
 /*                              Export the router                             */
 /* -------------------------------------------------------------------------- */

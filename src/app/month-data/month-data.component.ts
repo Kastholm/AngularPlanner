@@ -7,12 +7,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MonthDataComponent implements OnInit {
   month: any;
+  monthdata: any;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
+    
     this.month = {
       month: this.route.snapshot.params['month'],
     };
   }
+
+ 
 }

@@ -1,5 +1,6 @@
 //inject it to other compononents, so that they can use the data
-import { Injectable } from '@angular/core';
+//EventEmitter is used to emit an event when a month is added
+import { Injectable, EventEmitter } from '@angular/core';
 //http request
 import { HttpClient } from '@angular/common/http';
 //An Observable is a way of handling asynchronous operations, like HTTP requests. It can emit multiple values over time.
@@ -12,6 +13,8 @@ import { Observable } from 'rxjs';
 export class MonthapiService {
   //stores the fetched data
   private monthdata: any;
+  //emits an event when a month is added
+  /* public monthAdded: EventEmitter<void> = new EventEmitter(); */
   //inject the HttpClient
   constructor(private http: HttpClient) {}
   //http get request - returns an Observable - emits the data
@@ -29,4 +32,13 @@ export class MonthapiService {
   getMonthData(): any {
     return this.monthdata;
   }
+  addMonth(name: string): Observable<any> {
+    // Send the month name in the request body as a JSON object
+    const body = { name: name };
+    return this.http.post('http://localhost:4000/monthdata/addMonth', body);
+  }
+  //emit the event when a month is added
+  /* emitMonthAdded() {
+    this.monthAdded.emit();
+  } */
 }

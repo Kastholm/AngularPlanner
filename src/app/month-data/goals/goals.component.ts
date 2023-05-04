@@ -12,13 +12,12 @@ export class GoalsComponent implements OnInit {
   monthChosen: any;
   constructor(
     private monthApi: MonthapiService,
-    private route: ActivatedRoute
-    /* private routing: RoutingService */
+    private route: ActivatedRoute /* private routing: RoutingService */
   ) {
     //instance of ActivatedRoute, it contains information about the currently activated route associated with a component
     //params is an Observable that emits a new value whenever the route parameters change
     //When you subscribe to an Observable, you provide a callback function that will be executed every time the Observable emits a new value. In this case, the callback function takes a single argument params, which is an object containing the route parameters.
-     this.route.params.subscribe((params) => {
+    this.route.params.subscribe((params) => {
       //access the month parameter from the params object
       this.monthChosen = params['month'];
     });
@@ -36,6 +35,5 @@ export class GoalsComponent implements OnInit {
     /* this.routing.getCurrentMonth().subscribe((month) => {
       this.monthChosen = month;
     }); */
-    
   }
 }

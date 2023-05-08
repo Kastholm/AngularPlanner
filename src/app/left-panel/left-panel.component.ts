@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MonthapiService } from '../monthapi.service';
+import { RoutingService } from '../month-data/routing.service';
 // ES6 Modules or TypeScript
 //import Swal from 'sweetalert2/dist/sweetalert2.js';
 import Swal from 'sweetalert2';
@@ -11,13 +12,21 @@ import Swal from 'sweetalert2';
 })
 export class LeftPanelComponent {
   monthdata: any = [];
-  constructor(private monthApi: MonthapiService) {}
+  constructor(
+    private monthApi: MonthapiService,
+    private routing: RoutingService
+  ) {}
+
+  Refresh() {
+    window.location.reload(); 
+  }
 
   ngOnInit() {
     this.monthApi.fetchMonthData().subscribe((data) => {
       this.monthApi.setMonthData(data);
       this.monthdata = this.monthApi.getMonthData();
     });
+
     /* this.monthApi.addMonth('Testing').subscribe((data) => {
       console.log(data);
     }); */
@@ -60,7 +69,6 @@ export class LeftPanelComponent {
             this.monthApi.setMonthData(data);
             this.monthdata = this.monthApi.getMonthData();
           });
-          /* this.monthApi.emitMonthAdded(); */
         },
         (err) => {
           console.log('Error adding new month:', err);

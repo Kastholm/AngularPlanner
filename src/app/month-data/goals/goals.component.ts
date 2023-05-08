@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RoutingService } from '../routing.service';
 @Component({
   selector: 'goals',
@@ -7,16 +7,18 @@ import { RoutingService } from '../routing.service';
   providers: [RoutingService],
 })
 export class GoalsComponent implements OnInit {
-  monthdata: any[] = [];
-  monthChosen: string = '';
+  
   constructor(private routing: RoutingService) {}
 
-  async ngOnInit() {
-    this.monthChosen = this.routing.monthChosen;
-    // Fetch data and set month data
-    console.log('før', this.monthdata);
-    await this.routing.fetchDataAndSetMonthData();
-    this.monthdata = this.routing.monthdata;
-    console.log('efter', this.monthdata);
+  ngOnInit() {
+    this.routing.fetchDataAndSetMonthData();
+  }
+
+  get monthChosen() {
+    return this.routing.monthChosen;
+  }
+
+  get monthdata() {
+    return this.routing.monthdata;
   }
 }

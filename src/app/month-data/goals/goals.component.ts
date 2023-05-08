@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MonthapiService } from '../../monthapi.service';
-/* import { RoutingService } from '../routing.service'; */
+import { RoutingService } from '../routing.service';
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'goals',
@@ -12,7 +12,7 @@ export class GoalsComponent implements OnInit {
   monthChosen: any;
   constructor(
     private monthApi: MonthapiService,
-    private route: ActivatedRoute /* private routing: RoutingService */
+    private route: ActivatedRoute
   ) {
     //instance of ActivatedRoute, it contains information about the currently activated route associated with a component
     //params is an Observable that emits a new value whenever the route parameters change
@@ -31,9 +31,5 @@ export class GoalsComponent implements OnInit {
       //get data
       this.monthdata = this.monthApi.getMonthData();
     });
-    //get the route parameter service
-    /* this.routing.getCurrentMonth().subscribe((month) => {
-      this.monthChosen = month;
-    }); */
   }
 }

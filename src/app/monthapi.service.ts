@@ -45,15 +45,15 @@ export class MonthapiService {
     description: string,
     importance: number
   ): Observable<any> {
-    const body = {
-      monthName,
-      name,
-      category,
-      description,
-      importance,
-    };
-
-    return this.http.post('http://localhost:4000/monthdata/addgoal', body);
+    return this.http.post(
+      `http://localhost:4000/monthdata/${monthName}/goals`,
+      {
+        name,
+        category,
+        description,
+        importance,
+      }
+    );
   }
   //emit the event when a month is added
   /* emitMonthAdded() {

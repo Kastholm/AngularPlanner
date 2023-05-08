@@ -66,32 +66,30 @@ router.post("/addMonth", async (req, res) => {
 });
 
 // POST a new goal to a month
-router.post("/addgoal", async (req, res) => {
-  const { monthName, name, category, description, importance } = req.body;
+router.post("/:monthName/goals", async (req, res) => {
+  const monthName = req.params.monthName;
+  const { name, category, description, importance } = req.body;
 
-  const monthCollection = await testCollection();
-  monthCollection
-    .updateOne(
-      { name: monthName },
-      {
-        $push: {
-          goals: {
-            name,
-            category,
-            description,
-            importance,
-          },
-        },
-      }
-    )
-    .then((result) => {
-      console.log("Goal added:", result);
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log("Error adding goal:", err);
-      res.status(500).send(err);
-    });
+  const monthsCollection = await testCollection();
+  const monthRef = await monthsCollection.findOne({ name: monthName });
+
+  if (monthRef) {
+    const goal = {
+      name,
+      category,
+      description,
+      importance,
+    };
+
+    await monthsCollection.updateOne(
+      { _id: monthRef._id },
+      { $push: { goals: goal } }
+    );
+
+    res.status(201).send({ message: "New goal added successfully." });
+  } else {
+    res.status(404).send({ message: "Month not found." });
+  }
 });
 
 /* -------------------------------------------------------------------------- */

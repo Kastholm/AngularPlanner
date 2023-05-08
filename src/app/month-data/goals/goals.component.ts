@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MonthapiService } from '../../monthapi.service';
 /* import { RoutingService } from '../routing.service'; */
 import { ActivatedRoute } from '@angular/router';
@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class GoalsComponent implements OnInit {
   monthdata: any = [];
   monthChosen: any;
+  @Input() month: any = {};
   constructor(
     private monthApi: MonthapiService,
     private route: ActivatedRoute /* private routing: RoutingService */

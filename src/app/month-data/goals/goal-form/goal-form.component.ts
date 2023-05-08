@@ -93,7 +93,13 @@ export class GoalFormComponent implements OnInit {
         return;
       }
       this.monthApi
-        .addNewGoal(this.currentMonth, name, category, description, parseInt(importance))
+        .addNewGoal(
+          this.currentMonth,
+          name,
+          category,
+          description,
+          parseInt(importance)
+        )
         .subscribe(
           (response) => {
             console.log('Goal added:', response);

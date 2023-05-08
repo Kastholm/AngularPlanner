@@ -18,10 +18,14 @@ export class RoutingService {
     });
   }
 
-  fetchDataAndSetMonthData() {
-    this.monthApi.fetchMonthData().subscribe((monthdata) => {
-      this.monthApi.setMonthData(monthdata);
-      this.monthdata = this.monthApi.getMonthData();
+  // Fetch data and set month data - returns a promise
+  fetchDataAndSetMonthData(): Promise<void> {
+    return new Promise((resolve) => {
+      this.monthApi.fetchMonthData().subscribe((data) => {
+        this.monthApi.setMonthData(data);
+        this.monthdata = this.monthApi.getMonthData();
+        resolve(); 
+      });
     });
   }
 }

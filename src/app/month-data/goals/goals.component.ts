@@ -11,11 +11,12 @@ export class GoalsComponent implements OnInit {
   monthChosen: string = '';
   constructor(private routing: RoutingService) {}
 
-  ngOnInit() {
-    this.monthdata = this.routing.monthdata;
+  async ngOnInit() {
     this.monthChosen = this.routing.monthChosen;
     // Fetch data and set month data
-    this.routing.fetchDataAndSetMonthData();
-    console.log(this.monthdata);
+    console.log('før', this.monthdata);
+    await this.routing.fetchDataAndSetMonthData();
+    this.monthdata = this.routing.monthdata;
+    console.log('efter', this.monthdata);
   }
 }

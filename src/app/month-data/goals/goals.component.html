@@ -1,18 +1,22 @@
 <section>
-  <div *ngIf="monthdata">
-    <div class="bg-indigo-800 p-12">
+  <div *ngFor="let month of monthdata">
+    <div *ngIf="month.name === monthChosen" class="bg-indigo-800 p-12">
       <div class="text-white grid grid-cols-2 mb-8">
         <h1 class="font-bold text-4xl">
-          {{ monthChosen }}
+          {{ month.name }}
           <p class="font-semibold text-base">
-            Tilføj keypoint for {{ monthdata }}
+            Tilføj keypoint for {{ month.name }}
           </p>
         </h1>
         <goal-form></goal-form>
       </div>
       <div class="sectionMonth">
+        <!-- <p>her</p> -->
+        <!-- <pre>data {{ monthdata | json }}</pre> -->
+        <!-- <pre>goals {{ month.goals | json }}</pre>
+        <pre> måned {{ month.name | json }}</pre> -->
         <div
-          *ngFor="let goal of monthdata"
+          *ngFor="let goal of month.goals"
           class="p-4 my-4 rounded bg-gray-50 h-auto dark:bg-[#0d1117]"
         >
           <span class="flex justify-between items-center">
@@ -39,8 +43,8 @@
         </div>
       </div>
     </div>
-  </div>
-  <div *ngIf="!monthdata || monthdata.length === 0">
-    No goals available for {{ monthChosen }}.
+    <!-- <ng-template #elseBlock>
+        <h1>Hej</h1>
+      </ng-template> -->
   </div>
 </section>

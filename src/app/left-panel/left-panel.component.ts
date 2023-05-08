@@ -18,7 +18,7 @@ export class LeftPanelComponent {
   ) {}
 
   Refresh() {
-    window.location.reload(); 
+    window.location.reload();
   }
 
   ngOnInit() {

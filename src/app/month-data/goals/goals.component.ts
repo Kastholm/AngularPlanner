@@ -7,7 +7,6 @@ import { RoutingService } from '../routing.service';
   providers: [RoutingService],
 })
 export class GoalsComponent implements OnInit {
-  
   constructor(private routing: RoutingService) {}
 
   ngOnInit() {

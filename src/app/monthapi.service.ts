@@ -38,8 +38,22 @@ export class MonthapiService {
     return this.http.post('http://localhost:4000/monthdata/addMonth', body);
   }
 
-  addGoal(monthName: string, goal: any): Observable<any> {
-    return this.http.post(`http://localhost:4000/add-goal/${monthName}`, goal);
+  addNewGoal(
+    monthName: string,
+    name: string,
+    category: string,
+    description: string,
+    importance: number
+  ): Observable<any> {
+    const body = {
+      monthName,
+      name,
+      category,
+      description,
+      importance,
+    };
+
+    return this.http.post('http://localhost:4000/monthdata/addgoal', body);
   }
   //emit the event when a month is added
   /* emitMonthAdded() {

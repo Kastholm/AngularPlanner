@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class LeftPanelComponent {
   monthdata: any = [];
+  
   constructor(private monthApi: MonthapiService) {}
 
   ngOnInit() {

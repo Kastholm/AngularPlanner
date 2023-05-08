@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
   templateUrl: './goal-form.component.html',
   styleUrls: ['./goal-form.component.scss'],
 })
-export class GoalFormComponent {
+export class GoalFormComponent implements OnInit {
   importance(): number[] {
     const numbers = [];
     for (let i = 1; i < 6; i++) {
@@ -14,10 +14,10 @@ export class GoalFormComponent {
     }
     return numbers;
   }
-  
+  @Input() currentMonth: string = '';
   monthdata: any = [];
   constructor(private monthApi: MonthapiService) {}
-
+  ngOnInit(): void {}
   async addNewGoal() {
     const formHtml = `
       <div class="bg-gray-800 flex flex-col border border-gray-900 rounded-lg px-8 py-6">
@@ -93,22 +93,13 @@ export class GoalFormComponent {
         return;
       }
       this.monthApi
-        .addGoal(this.month, { name, category, description, importance })
+        .addNewGoal(this.currentMonth, name, category, description, parseInt(importance))
         .subscribe(
           (response) => {
             console.log('Goal added:', response);
-            // Update the local month data with the new goal
-            const updatedMonthData = { ...this.monthdata };
-            updatedMonthData.goals.push({
-              name,
-              category,
-              description,
-              importance,
-            });
-            this.monthApi.setMonthData(updatedMonthData);
           },
           (error) => {
-            console.log('Error adding goal:', error);
+            console.error('Error adding goal:', error);
           }
         );
     }

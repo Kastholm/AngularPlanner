@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 //An Observable is a way of handling asynchronous operations, like HTTP requests. It can emit multiple values over time.
 import { Observable } from 'rxjs';
 
+import { GlobalService } from './global.service';
+
 //Where
 @Injectable({
   providedIn: 'root',
@@ -13,19 +15,21 @@ import { Observable } from 'rxjs';
 export class MonthapiService {
   //stores the fetched data
   private monthdata: any;
+  // URL variable to store the base API URL
+  private path: string;
   //emits an event when a month is added
   /* public monthAdded: EventEmitter<void> = new EventEmitter(); */
   //inject the HttpClient
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private globalService: GlobalService) {
+    this.path = this.globalService.globalPath;
+  }
   //http get request - returns an Observable - emits the data
   //Components can then subscribe to the Observable to get the data
   fetchMonthData(): Observable<any> {
     //Local
     console.log('Fetching month data...');
-    return this.http.get('http://localhost:4000/monthdata');
+    return this.http.get(`${this.path}/monthdata`);
     console.log('Fetching success...');
-    //Public
-    /* return this.http.get('http://192.168.87.155:27019/monthdata'); */
   }
   //setters and getters - allows other components to store and retrieve the data
   setMonthData(data: any) {
@@ -39,7 +43,7 @@ export class MonthapiService {
   addMonth(name: string): Observable<any> {
     // Send the month name in the request body as a JSON object
     const body = { name: name };
-    return this.http.post('http://localhost:4000/monthdata/addMonth', body);
+    return this.http.post(`${this.path}/monthdata/addMonth`, body);
   }
 
   addNewGoal(
@@ -49,15 +53,12 @@ export class MonthapiService {
     description: string,
     importance: number
   ): Observable<any> {
-    return this.http.post(
-      `http://localhost:4000/monthdata/${monthName}/goals`,
-      {
-        name,
-        category,
-        description,
-        importance,
-      }
-    );
+    return this.http.post(`${this.path}/monthdata/${monthName}/goals`, {
+      name,
+      category,
+      description,
+      importance,
+    });
   }
   //emit the event when a month is added
   /* emitMonthAdded() {

@@ -66,31 +66,7 @@ router.post("/addMonth", async (req, res) => {
 });
 
 // POST a new goal to a month
-router.post("/:monthName/goals", async (req, res) => {
-  const monthName = req.params.monthName;
-  const { name, category, description, importance } = req.body;
 
-  const monthsCollection = await testCollection();
-  const monthRef = await monthsCollection.findOne({ name: monthName });
-
-  if (monthRef) {
-    const goal = {
-      name,
-      category,
-      description,
-      importance,
-    };
-
-    await monthsCollection.updateOne(
-      { _id: monthRef._id },
-      { $push: { goals: goal } }
-    );
-
-    res.status(201).send({ message: "New goal added successfully." });
-  } else {
-    res.status(404).send({ message: "Month not found." });
-  }
-});
 
 /* -------------------------------------------------------------------------- */
 /*                              Export the router                             */

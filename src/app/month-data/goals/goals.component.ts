@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MonthapiService } from '../../monthapi.service';
 import { RoutingService } from '../routing.service';
 @Component({
   selector: 'goals',
@@ -8,20 +7,15 @@ import { RoutingService } from '../routing.service';
   providers: [RoutingService],
 })
 export class GoalsComponent implements OnInit {
-  monthdata: any = [];
-  monthChosen: any;
-  constructor(
-    /*  private monthApi: MonthapiService, */
-    private routing: RoutingService
-  ) {
-    /* this.route.params.subscribe((params) => {
-      this.monthChosen = params['month'];
-    }); */
-  }
+  monthdata: any[] = [];
+  monthChosen: string = '';
+  constructor(private routing: RoutingService) {}
 
   ngOnInit() {
-    this.routing.fetchDataAndSetMonthData();
     this.monthdata = this.routing.monthdata;
     this.monthChosen = this.routing.monthChosen;
+    // Fetch data and set month data
+    this.routing.fetchDataAndSetMonthData();
+    console.log(this.monthdata);
   }
 }

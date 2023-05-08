@@ -19,8 +19,8 @@ export class RoutingService {
   }
 
   fetchDataAndSetMonthData() {
-    this.monthApi.fetchMonthData().subscribe((data) => {
-      this.monthApi.setMonthData(data);
+    this.monthApi.fetchMonthData().subscribe((monthdata) => {
+      this.monthApi.setMonthData(monthdata);
       this.monthdata = this.monthApi.getMonthData();
     });
   }

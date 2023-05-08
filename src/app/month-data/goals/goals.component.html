@@ -1,13 +1,18 @@
-<section *ngFor="let data of monthdata">
-  <div *ngIf="data.name === monthChosen">
+<section>
+  <div *ngIf="monthdata">
     <div class="bg-indigo-800 p-12">
       <div class="text-white grid grid-cols-2 mb-8">
-        <h1 class="font-bold text-4xl">{{ data.name }} <p class="font-semibold text-base">Tilføj keypoint for ((MånedNavn))</p></h1>
+        <h1 class="font-bold text-4xl">
+          {{ monthChosen }}
+          <p class="font-semibold text-base">
+            Tilføj keypoint for {{ monthdata }}
+          </p>
+        </h1>
         <goal-form></goal-form>
       </div>
       <div class="sectionMonth">
         <div
-          *ngFor="let goal of data.goals"
+          *ngFor="let goal of monthdata"
           class="p-4 my-4 rounded bg-gray-50 h-auto dark:bg-[#0d1117]"
         >
           <span class="flex justify-between items-center">
@@ -34,5 +39,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="!monthdata || monthdata.length === 0">
+    No goals available for {{ monthChosen }}.
   </div>
 </section>

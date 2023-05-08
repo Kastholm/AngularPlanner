@@ -21,13 +21,17 @@ export class MonthapiService {
   //Components can then subscribe to the Observable to get the data
   fetchMonthData(): Observable<any> {
     //Local
+    console.log('Fetching month data...');
     return this.http.get('http://localhost:4000/monthdata');
+    console.log('Fetching success...');
     //Public
     /* return this.http.get('http://192.168.87.155:27019/monthdata'); */
   }
   //setters and getters - allows other components to store and retrieve the data
   setMonthData(data: any) {
     this.monthdata = data;
+    console.log('Month data set 1', this.monthdata);
+    return this.monthdata;
   }
   getMonthData(): any {
     return this.monthdata;

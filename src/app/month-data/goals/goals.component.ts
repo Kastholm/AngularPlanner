@@ -11,6 +11,7 @@ export class GoalsComponent implements OnInit {
   monthdata: any = [];
   monthChosen: any;
   @Input() month: any = {};
+  @Input() currentMonth: string = '';
   constructor(
     private monthApi: MonthapiService,
     private route: ActivatedRoute /* private routing: RoutingService */

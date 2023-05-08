@@ -1,21 +1,27 @@
-//inject it to other compononents, so that they can use the data
-//EventEmitter is used to emit an event when a month is added
-import { Injectable, EventEmitter } from '@angular/core';
-//http request
-import { HttpClient } from '@angular/common/http';
-//An Observable is a way of handling asynchronous operations, like HTTP requests. It can emit multiple values over time.
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { MonthapiService } from '../monthapi.service';
 import { ActivatedRoute } from '@angular/router';
-//Transforms the values emitted by an observable by applying a function to each value
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RoutingService{
+export class RoutingService {
+  monthdata: any = [];
+  monthChosen: any;
 
   constructor(
-    private route: ActivatedRoute,
+    private monthApi: MonthapiService,
+    private route: ActivatedRoute
   ) {
+    this.route.params.subscribe((params) => {
+      this.monthChosen = params['month'];
+    });
+  }
+
+  fetchDataAndSetMonthData() {
+    this.monthApi.fetchMonthData().subscribe((data) => {
+      this.monthApi.setMonthData(data);
+      this.monthdata = this.monthApi.getMonthData();
+    });
   }
 }

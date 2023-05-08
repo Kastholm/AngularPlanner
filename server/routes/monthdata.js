@@ -65,6 +65,23 @@ router.post("/addMonth", async (req, res) => {
   }
 });
 
+// POST a new goal to a month
+router.post("/add-goal/:monthName", async (req, res) => {
+  const monthName = req.params.monthName;
+  const goal = req.body;
+
+  const monthsCollection = await testCollection();
+  monthsCollection
+    .updateOne({ name: monthName }, { $push: { goals: goal } })
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log("Error adding goal:", err);
+      res.status(500).send(err);
+    });
+});
+
 /* -------------------------------------------------------------------------- */
 /*                              Export the router                             */
 /* -------------------------------------------------------------------------- */

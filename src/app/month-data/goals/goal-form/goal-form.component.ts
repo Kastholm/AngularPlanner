@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MonthapiService } from '../../../monthapi.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -14,6 +14,9 @@ export class GoalFormComponent {
     }
     return numbers;
   }
+  
+  monthdata: any = [];
+  constructor(private monthApi: MonthapiService) {}
 
   async addNewGoal() {
     const formHtml = `
@@ -89,8 +92,25 @@ export class GoalFormComponent {
       if (name === '') {
         return;
       }
-      console.log('Form values:', { name, category, description, importance });
-      // Process the form values here
+      this.monthApi
+        .addGoal(this.month, { name, category, description, importance })
+        .subscribe(
+          (response) => {
+            console.log('Goal added:', response);
+            // Update the local month data with the new goal
+            const updatedMonthData = { ...this.monthdata };
+            updatedMonthData.goals.push({
+              name,
+              category,
+              description,
+              importance,
+            });
+            this.monthApi.setMonthData(updatedMonthData);
+          },
+          (error) => {
+            console.log('Error adding goal:', error);
+          }
+        );
     }
   }
 }

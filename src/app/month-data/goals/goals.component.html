@@ -1,11 +1,11 @@
 <section *ngFor="let data of monthdata">
-  <div class="sectionMonth" *ngIf="data.name === monthChosen">
+  <div *ngIf="data.name === monthChosen">
     <div class="bg-indigo-800 p-12">
-      <div class="text-white">
-        <h1 class="font-bold text-4xl">{{ data.name }}</h1>
-        <p class="font-semibold">Tilføj keypoint for ((MånedNavn))</p>
+      <div class="text-white grid grid-cols-2 mb-8">
+        <h1 class="font-bold text-4xl">{{ data.name }} <p class="font-semibold text-base">Tilføj keypoint for ((MånedNavn))</p></h1>
+        <goal-form></goal-form>
       </div>
-      <div>
+      <div class="sectionMonth">
         <div
           *ngFor="let goal of data.goals"
           class="p-4 my-4 rounded bg-gray-50 h-auto dark:bg-[#0d1117]"
@@ -33,10 +33,6 @@
           </span>
         </div>
       </div>
-    </div>
-    <!-- Next -->
-    <div class="p-12">
-      <goal-form></goal-form>
     </div>
   </div>
 </section>

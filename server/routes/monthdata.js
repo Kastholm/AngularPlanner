@@ -7,70 +7,84 @@ require("dotenv").config();
 const express = require("express");
 // Loading mongoose to interact with MongoDB database
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 // Loading router to define and handle routes
 const router = express.Router();
 
 /* -------------------------------------------------------------------------- */
-/*                         Defining the Month schema                          */
+/*                         SCHEMAS                                            */
 /* -------------------------------------------------------------------------- */
-const monthSchema = new mongoose.Schema({
-  name: String,
-  goals: [String],
-  learned: [String],
-  made: [String],
-  notes: [String],
+
+const childSchema = new Schema({
+  title: String,
+  category: String,
+  description: String,
+  importance: Number,
+});
+// Define the childSchema
+const goalSchema = new Schema({
+  title: String,
+  category: String,
+  description: String,
 });
 
+// Define the monthSchema
+const monthSchema = new Schema({
+  name: String,
+  goals: [goalSchema],
+  learned: [childSchema],
+  made: [childSchema],
+  notes: [childSchema],
+});
+
+// Create the Month model based on the monthSchema
 const Month = mongoose.model("Month", monthSchema);
 
 /* -------------------------------------------------------------------------- */
 /*            Connection to MongoDB Database and collection "months"          */
 /* -------------------------------------------------------------------------- */
-async function testConnection() {
+async function dbConnection() {
   // Get the connection string from the .env file and append the database name
-  const connectionString = `${process.env.MONGODB_URL}`;
+  const connectionString = `${process.env.MONGODB_URL}/monthplanner`;
   await mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
 }
-testConnection();
+dbConnection();
 
 /* -------------------------------------------------------------------------- */
-/*                  Routes for the API calls to the database                  */
+/*                                   ROUTES                                   */
 /* -------------------------------------------------------------------------- */
-// Get months (for testing purposes)
+/* -------------------------------------------------------------------------- */
+/*                                 Router.get                                 */
+/*              Purpose: Get all the monthdata from the database              */
+/* -------------------------------------------------------------------------- */
 router.get("/", async (req, res) => {
   try {
-    const data = await Month.find({});
-    console.log("Sending data:", data);
-    res.send(data);
+    const showMonthData = await Month.find();
+    res.json(showMonthData);
   } catch (err) {
-    console.log("Error fetching data:", err);
-    res.status(500).send(err);
+    res.json({ message: err });
   }
 });
-
-// POST a new month with subcollections
+/* -------------------------------------------------------------------------- */
+/*                                 Router.post                                */
+/*                  Purpose: Add a new monthset to the database               */
+/* -------------------------------------------------------------------------- */
 router.post("/addMonth", async (req, res) => {
-  const monthName = req.body.name;
-  const newMonth = new Month({
-    name: monthName,
-    goals: [],
-    learned: [],
-    made: [],
-    notes: [],
-  });
-
   try {
+    const monthName = req.body.name;
+    // Create a new Month instance based on the monthSchema
+    const newMonth = new Month({
+      name: monthName,
+    });
     await newMonth.save();
-    res.status(201).send({ message: "New month added successfully" });
+    res.json(newMonth); // Respond with the added month data
   } catch (err) {
-    console.log("Error adding new month:", err);
-    res.status(500).send(err);
+    res.json({ message: err });
   }
 });
-
 /* -------------------------------------------------------------------------- */
 /*                              Export the router                             */
 /* -------------------------------------------------------------------------- */

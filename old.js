@@ -71,3 +71,36 @@ router.post("/addMonth", async (req, res) => {
 /*                              Export the router                             */
 /* -------------------------------------------------------------------------- */
 module.exports = router;
+
+/* 
+// Get months (for testing purposes)
+router.get("/", async (req, res) => {
+  try {
+    const data = await Month.find({});
+    console.log("Sending data:", data);
+    res.send(data);
+  } catch (err) {
+    console.log("Error fetching data:", err);
+    res.status(500).send(err);
+  }
+});
+
+// POST a new month with subcollections
+router.post("/addMonth", async (req, res) => {
+  const monthName = req.body.name;
+  const newMonth = new Month({
+    name: monthName,
+    goals: [],
+    learned: [],
+    made: [],
+    notes: [],
+  });
+
+  try {
+    await newMonth.save();
+    res.status(201).send({ message: "New month added successfully" });
+  } catch (err) {
+    console.log("Error adding new month:", err);
+    res.status(500).send(err);
+  }
+}); */

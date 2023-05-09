@@ -28,6 +28,9 @@ export class LeftPanelComponent {
     });
   }
 
+
+
+  
   // Create a method that calls the addMonth() method of the service
   async addNewMonth(name: string) {
     const { value: formValues } = await Swal.fire({

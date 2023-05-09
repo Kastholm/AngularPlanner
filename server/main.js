@@ -30,6 +30,7 @@ app.use(express.json());
 
 //getting the route file from the routes folder
 const monthdata = require("./routes/monthdata");
+
 //url call
 app.use("/monthdata", monthdata);
 

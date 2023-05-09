@@ -93,34 +93,6 @@ export class GoalFormComponent implements OnInit {
         return;
       }
       console.log('Form values', formValues);
-      // Call addGoal function from the MonthApiService
-      this.monthApi
-        .addGoal(
-          this.currentMonth,
-          name,
-          category,
-          description,
-          parseInt(importance)
-        )
-        .subscribe(
-          (response) => {
-            console.log('Goal added successfully', response);
-            // Perform any additional actions or show a success message
-            Swal.fire({
-              icon: 'success',
-              title: 'Goal added successfully',
-            });
-          },
-          (error) => {
-            console.error('Error adding goal:', error);
-            // Perform any additional actions or show an error message
-            Swal.fire({
-              icon: 'error',
-              title: 'Error adding goal',
-              text: 'An error occurred while adding the goal. Please try again.',
-            });
-          }
-        );
     }
   }
 }

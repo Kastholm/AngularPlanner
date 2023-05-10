@@ -96,10 +96,6 @@ router.post("/addGoal/:name", async (req, res) => {
     const { monthName, goalData } = req.body;
     // Find the month by its title
     const month = await Month.findOne({ name: monthName /* 'TestMonth' */ });
-    // If month doesn't exist, return error
-    if (!month) {
-      return res.status(404).json({ message: "Month not found" });
-    }
     // Create a new goal based on the goalSchema
     const newGoal = {
       title: goalData.title,
@@ -122,11 +118,41 @@ router.post("/addGoal/:name", async (req, res) => {
 /*                                 Router.patch                               */
 /*                       Purpose: Update content of a goal                    */
 /* -------------------------------------------------------------------------- */
-router.patch("/goalCompleted", async (req, res) => {
+router.patch("/updateGoal", async (req, res) => {
   try {
-    res.json("success");
+    const { monthName, goalData } = req.body;
+
+    // Find the month by its name
+    const month = await Month.findOne({ name: monthName });
+
+    // If month doesn't exist, return error
+    if (!month) {
+      return res.status(404).json({ message: "Month not found" });
+    }
+
+    // Find the goal by its title in the month's goals array
+    const goalIndex = month.goals.findIndex(
+      (goal) => goal.title === goalData.title
+    );
+
+    // If the goal is not found, return an error
+    if (goalIndex === -1) {
+      return res.status(404).json({ message: "Goal not found" });
+    }
+
+    // Update the goal with the provided data
+    month.goals[goalIndex] = {
+      ...month.goals[goalIndex],
+      ...goalData,
+    };
+
+    // Save the updated month document
+    await month.save();
+
+    // Send a success response
+    res.json({ message: "Goal updated successfully", month });
   } catch (err) {
-    res.json("error");
+    res.status(500).json({ message: err });
   }
 });
 /* -------------------------------------------------------------------------- */

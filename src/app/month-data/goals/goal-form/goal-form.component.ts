@@ -28,6 +28,7 @@ export class GoalFormComponent implements OnInit {
     // Initialize the correct monthName depending on the month chosen
     this.monthName = this.routing.monthChosen;
   }
+
   // SweetAlert Form
   async addNewGoal() {
     const formHtml = `
@@ -193,8 +194,10 @@ export class GoalFormComponent implements OnInit {
     <option value="4">4</option>
     <option value="5">5</option>
   </select>
-      </form>
-        </div>
+
+  <div class=" py-4" [ngStyle]="{ 'background-color': completed ? 'green' : 'red' }">
+  <p>Skift Status: <b class="uppercase">${completed}</b></p>
+</div>
       `;
 
       const { value: editValues } = await Swal.fire({
@@ -215,6 +218,9 @@ export class GoalFormComponent implements OnInit {
           const importance = (Swal.getPopup() as HTMLElement).querySelector(
             'select#importance'
           ) as HTMLSelectElement;
+
+          //her skal completed vel sættes?
+
           // Returns the values of the form
           return {
             name: name.value,
@@ -231,6 +237,15 @@ export class GoalFormComponent implements OnInit {
         const { name, category, description, importance, completed } =
           editValues;
 
+        // Send data to DB
+        /* this.monthApi.updateGoal(this.monthName, editValues).subscribe(
+          (res) => {
+            console.log('Goal updated:', res);
+          },
+          (err) => {
+            console.log('Error', err);
+          }
+        ); */
         //dev purpose
         console.log('Her skal router patch være', editValues);
       }

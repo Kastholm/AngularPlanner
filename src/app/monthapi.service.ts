@@ -55,8 +55,17 @@ export class MonthapiService {
     return this.http.post(`${this.path}/monthdata/addGoal/${monthName}`, body);
   }
 
-  updateGoal(monthName: string, goalName: string, completed: boolean) {
-    const body = {};
-    return this.http.patch(`${this.path}/goalCompleted`, body);
+  updateGoal(monthName: string, goalData: any): Observable<any> {
+    const body = {
+      monthName: monthName,
+      goalData: {
+        title: goalData.title,
+        category: goalData.category,
+        description: goalData.description,
+        importance: goalData.importance,
+        completed: goalData.completed,
+      },
+    };
+    return this.http.patch(`${this.path}/monthdata/updateGoal`, body);
   }
 }

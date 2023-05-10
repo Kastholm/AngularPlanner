@@ -26,6 +26,7 @@ const goalSchema = new Schema({
   category: String,
   description: String,
   importance: Number,
+  completed: Boolean,
 });
 
 // Define the monthSchema
@@ -105,6 +106,7 @@ router.post("/addGoal/:name", async (req, res) => {
       category: goalData.category,
       description: goalData.description,
       importance: goalData.importance,
+      completed: goalData.completed,
     };
     // Pushing to the database
     month.goals.push(newGoal);
@@ -116,6 +118,21 @@ router.post("/addGoal/:name", async (req, res) => {
     res.status(500).json({ message: err });
   }
 });
+/* -------------------------------------------------------------------------- */
+/*                                 Router.patch                               */
+/*                       Purpose: Update content of a goal                    */
+/* -------------------------------------------------------------------------- */
+router.patch("/goalCompleted", async (req, res) => {
+  try {
+    res.json("success");
+  } catch (err) {
+    res.json("error");
+  }
+});
+/* -------------------------------------------------------------------------- */
+/*                                 Router.post                                */
+/*                  Purpose: Duplicating monthgoals into another month        */
+/* -------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------- */
 /*                              Export the router                             */

@@ -49,8 +49,14 @@ export class MonthapiService {
         category: goalData.category,
         description: goalData.description,
         importance: goalData.importance,
+        completed: false,
       },
     };
     return this.http.post(`${this.path}/monthdata/addGoal/${monthName}`, body);
+  }
+
+  updateGoal(monthName: string, goalName: string, completed: boolean) {
+    const body = {};
+    return this.http.patch(`${this.path}/goalCompleted`, body);
   }
 }

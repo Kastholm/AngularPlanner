@@ -8,7 +8,18 @@
             Tilføj keypoint for {{ month.name }}
           </p>
         </h1>
-        <goal-form></goal-form>
+        <goal-form
+          #childSelector
+          (requestUpdateGoal)="
+            updateGoal(
+              $event.title,
+              $event.category,
+              $event.description,
+              $event.importance,
+              $event.completed
+            )
+          "
+        ></goal-form>
       </div>
       <div class="sectionMonth">
         <!-- <p>her</p> -->
@@ -19,15 +30,25 @@
           *ngFor="let goal of month.goals"
           class="p-4 my-4 rounded bg-gray-50 h-auto dark:bg-[#0d1117]"
         >
-          <span class="flex justify-between items-center">
-            <p class="text-white text-3xl font-bold">
+          <span id="goal" class="flex justify-between items-center">
+            <p class="goalName text-white text-3xl font-bold">
               {{ goal.title }}
             </p>
             <div class="flex">
+              <!-- (click)="doneTask(goal.title)" -->
               <button
+                (click)="
+                  childSelector.triggerUpdateGoal(
+                    goal.title,
+                    goal.category,
+                    goal.description,
+                    goal.importance,
+                    goal.completed
+                  )
+                "
                 class="hover:border-white text-white bg-[#21262d] p-2 border border-gray-600 rounded-lg"
               >
-                ✅ Done
+                ✅ Update
               </button>
             </div>
           </span>
@@ -43,8 +64,5 @@
         </div>
       </div>
     </div>
-    <!-- <ng-template #elseBlock>
-        <h1>Hej</h1>
-      </ng-template> -->
   </div>
 </section>

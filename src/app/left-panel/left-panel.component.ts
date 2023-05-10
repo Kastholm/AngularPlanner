@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MonthapiService } from '../monthapi.service';
 import { RoutingService } from '../month-data/routing.service';
-// ES6 Modules or TypeScript
-//import Swal from 'sweetalert2/dist/sweetalert2.js';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'left-panel',
@@ -28,15 +26,11 @@ export class LeftPanelComponent {
     });
   }
 
-
-
-  
   // Create a method that calls the addMonth() method of the service
   async addNewMonth(name: string) {
     const { value: formValues } = await Swal.fire({
       title: 'Månedens navn',
-      html:
-        '<input id="swal-input1" class="swal2-input">',
+      html: '<input id="swal-input1" class="swal2-input">',
       focusConfirm: false,
       preConfirm: () => {
         return [

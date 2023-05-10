@@ -5,6 +5,8 @@
 const express = require("express");
 // Loading CORS (Cross-Origin Resource Sharing)
 const cors = require("cors");
+//Loading body-parser to parse incoming request bodies
+const bodyParser = require("body-parser");
 // Creating an Express app
 const app = express();
 
@@ -12,7 +14,7 @@ const app = express();
 /*                 Running middleware for body parser and CORS                */
 /* -------------------------------------------------------------------------- */
 // Configuring Body Parser middleware to parse JSON data
-/* app.use(bodyParser.json()); */
+app.use(bodyParser.json());
 
 /* -------------------------------------------------------------------------- */
 /*                  Configure CORS to accept every connection                 */

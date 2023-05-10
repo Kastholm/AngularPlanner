@@ -3,6 +3,9 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 //Config for collecting ./app/app.module.ts
 import { AppModule } from './app/app.module';
+
+import Swal from 'sweetalert2';
+
 //Initiate and starts the application by using platformBrowserDynamic and  loading bootstrapModule with AppModule
 platformBrowserDynamic()
   .bootstrapModule(AppModule)

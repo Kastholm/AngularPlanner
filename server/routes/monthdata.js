@@ -12,20 +12,20 @@ const Schema = mongoose.Schema;
 const router = express.Router();
 
 /* -------------------------------------------------------------------------- */
-/*                         SCHEMAS                                            */
+/*                                SCHEMAS                                     */
 /* -------------------------------------------------------------------------- */
 
 const childSchema = new Schema({
   title: String,
   category: String,
   description: String,
-  importance: Number,
 });
 // Define the childSchema
 const goalSchema = new Schema({
   title: String,
   category: String,
   description: String,
+  importance: Number,
 });
 
 // Define the monthSchema
@@ -85,6 +85,38 @@ router.post("/addMonth", async (req, res) => {
     res.json({ message: err });
   }
 });
+/* -------------------------------------------------------------------------- */
+/*                                 Router.post                                */
+/*                  Purpose: Add a new goal to a specific month               */
+/* -------------------------------------------------------------------------- */
+router.post("/addGoal/:name", async (req, res) => {
+  try {
+    // req data from body
+    const { monthName, goalData } = req.body;
+    // Find the month by its title
+    const month = await Month.findOne({ name: monthName /* 'TestMonth' */ });
+    // If month doesn't exist, return error
+    if (!month) {
+      return res.status(404).json({ message: "Month not found" });
+    }
+    // Create a new goal based on the goalSchema
+    const newGoal = {
+      title: goalData.title,
+      category: goalData.category,
+      description: goalData.description,
+      importance: goalData.importance,
+    };
+    // Pushing to the database
+    month.goals.push(newGoal);
+    // Save the updated month to the database
+    await month.save();
+    // Output the data to the console
+    res.json(month);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+});
+
 /* -------------------------------------------------------------------------- */
 /*                              Export the router                             */
 /* -------------------------------------------------------------------------- */

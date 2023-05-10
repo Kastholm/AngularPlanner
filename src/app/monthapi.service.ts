@@ -1,11 +1,11 @@
 //inject it to other compononents, so that they can use the data
 //EventEmitter is used to emit an event when a month is added
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 //http request
 import { HttpClient } from '@angular/common/http';
 //An Observable is a way of handling asynchronous operations, like HTTP requests. It can emit multiple values over time.
 import { Observable } from 'rxjs';
-
+// global variables
 import { GlobalService } from './global.service';
 
 //Where
@@ -17,8 +17,6 @@ export class MonthapiService {
   private monthdata: any;
   // URL variable to store the base API URL
   private path: string;
-  //emits an event when a month is added
-  /* public monthAdded: EventEmitter<void> = new EventEmitter(); */
   //inject the HttpClient
   constructor(private http: HttpClient, private globalService: GlobalService) {
     this.path = this.globalService.globalPath;
@@ -26,10 +24,7 @@ export class MonthapiService {
   //http get request - returns an Observable - emits the data
   //Components can then subscribe to the Observable to get the data
   fetchMonthData(): Observable<any> {
-    //Local
-    console.log('Fetching month data...');
     return this.http.get(`${this.path}/monthdata`);
-    console.log('Fetching success...');
   }
   //setters and getters - allows other components to store and retrieve the data
   setMonthData(data: any) {
@@ -46,8 +41,16 @@ export class MonthapiService {
     return this.http.post(`${this.path}/monthdata/addMonth`, body);
   }
 
-  //emit the event when a month is added
-  /* emitMonthAdded() {
-    this.monthAdded.emit();
-  } */
+  addGoal(monthName: string, goalData: any): Observable<any> {
+    const body = {
+      monthName: monthName,
+      goalData: {
+        title: goalData.name,
+        category: goalData.category,
+        description: goalData.description,
+        importance: goalData.importance,
+      },
+    };
+    return this.http.post(`${this.path}/monthdata/addGoal/${monthName}`, body);
+  }
 }

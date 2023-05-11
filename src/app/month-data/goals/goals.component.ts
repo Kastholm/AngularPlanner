@@ -13,21 +13,35 @@ export class GoalsComponent implements OnInit {
     private monthApi: MonthapiService
   ) {}
 
+  // Fetch data and set month data - returns a promise
   ngOnInit() {
     this.routing.fetchDataAndSetMonthData();
   }
-
+  // Get the selected month from the Routing service
   get monthChosen() {
     return this.routing.monthChosen;
   }
-
+  // Get the month data from the Routing service
   get monthdata() {
     return this.routing.monthdata;
   }
 
-  updateGoal(title: string, category: string, description: string, importance: number, completed: boolean) {
+  updateGoal(
+    title: string,
+    category: string,
+    description: string,
+    importance: number,
+    completed: boolean
+  ) {
     console.log('updateGoal Parent called');
-    console.log('updateGoal Parent called with data:', title, category, description, importance, completed);
+    console.log(
+      'updateGoal Parent called with data:',
+      title,
+      category,
+      description,
+      importance,
+      completed
+    );
   }
 
   doneTask(goalName: string) {

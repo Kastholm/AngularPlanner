@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class NoteFormComponent {
 
+  addNewNote() { 
+    console.log('add new note')
+  };
 }

@@ -5,6 +5,7 @@ import { MonthapiService } from '../../../monthapi.service';
 import { RoutingService } from '../../routing.service';
 // Importing needed packages
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+// @ts-ignore
 import { marked } from 'marked';
 @Component({
   selector: 'note-form',

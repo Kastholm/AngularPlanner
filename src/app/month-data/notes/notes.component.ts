@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { RoutingService } from '../routing.service';
 import { MonthapiService } from '../../monthapi.service';
 // Importing needed packages
+// @ts-ignore
 import { marked } from 'marked';
+import { mangle } from 'marked-mangle';
+import { gfmHeadingId } from 'marked-gfm-heading-id';
 @Component({
   selector: 'notes',
   templateUrl: './notes.component.html',
@@ -14,7 +17,10 @@ export class NotesComponent implements OnInit {
   constructor(
     private routing: RoutingService,
     private monthApi: MonthapiService
-  ) {}
+  ) {
+    marked.use(mangle());
+    marked.use(gfmHeadingId());
+  }
 
   // Fetch data and set month data - returns a promise
   ngOnInit() {
@@ -31,6 +37,7 @@ export class NotesComponent implements OnInit {
     return this.routing.monthdata;
   }
   //Loading Markdown
+
   parseMarkdown(content: string): string {
     return marked(content);
   }

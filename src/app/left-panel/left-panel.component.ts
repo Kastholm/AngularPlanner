@@ -26,6 +26,16 @@ export class LeftPanelComponent {
     });
   }
 
+  isHovered = false;
+
+  onMouseEnter() {
+    this.isHovered = true;
+  }
+
+  onMouseLeave() {
+    this.isHovered = false;
+  }
+
   // Create a method that calls the addMonth() method of the service
   async addNewMonth(name: string) {
     const { value: formValues } = await Swal.fire({

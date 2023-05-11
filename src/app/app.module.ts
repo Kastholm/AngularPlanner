@@ -13,6 +13,7 @@ import { CompletedComponent } from './month-data/completed/completed.component';
 //Subcomponents
 import { GoalFormComponent } from './month-data/goals/goal-form/goal-form.component';
 import { NoteFormComponent } from './month-data/notes/note-form/note-form.component';
+import { LearnedFormComponent } from './month-data/learned/learned-form/learned-form.component';
 //Routes from NgModules
 const appRoutes: Routes = [
   { path: 'month/:month', component: MonthDataComponent },
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
     CompletedComponent,
     GoalFormComponent,
     NoteFormComponent,
+    LearnedFormComponent,
   ],
   imports: [BrowserModule, HttpClientModule, RouterModule.forRoot(appRoutes)],
   providers: [],

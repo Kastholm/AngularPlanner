@@ -95,4 +95,22 @@ export class MonthapiService {
     };
     return this.http.post(`${this.path}/monthdata/addNote/${monthName}`, body);
   }
+  /* -------------------------------------------------------------------------- */
+  /*                             Add a new Learned                              */
+  /*                        Used by: learned & learned-form                     */
+  /* -------------------------------------------------------------------------- */
+  addLearned(monthName: string, learnedData: any): Observable<any> {
+    const body = {
+      monthName: monthName,
+      learnedData: {
+        title: learnedData.name,
+        category: learnedData.category,
+        description: learnedData.description,
+      },
+    };
+    return this.http.post(
+      `${this.path}/monthdata/addLearned/${monthName}`,
+      body
+    );
+  }
 }

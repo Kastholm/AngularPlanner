@@ -35,7 +35,7 @@ const monthSchema = new Schema({
   goals: [goalSchema],
   learned: [childSchema],
   made: [childSchema],
-  notes: [childSchema], 
+  notes: [childSchema],
 });
 
 // Create the Month model based on the monthSchema
@@ -190,6 +190,30 @@ router.post("/addNote/:name", async (req, res) => {
     // Save the updated month to the database
     await month.save();
     // Output the data to the console
+    res.json(month);
+  } catch (err) {
+    res.json("err");
+  }
+});
+
+/* -------------------------------------------------------------------------- */
+/*                               LEARNED ROUTES                               */
+/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                 Router.post                                */
+/*                Purpose: Add a new LEARNED to a specific month              */
+/* -------------------------------------------------------------------------- */
+router.post("/addLearned/:name", async (req, res) => {
+  try {
+    const { monthName, learnedData } = req.body;
+    const month = await Month.findOne({ name: monthName });
+    const newLearned = {
+      title: learnedData.title,
+      category: learnedData.category,
+      description: learnedData.description,
+    };
+    month.learned.push(newLearned);
+    await month.save();
     res.json(month);
   } catch (err) {
     res.json("err");

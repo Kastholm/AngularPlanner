@@ -32,15 +32,23 @@ export class MonthapiService {
     console.log('Month data set 1', this.monthdata);
     return this.monthdata;
   }
+  // Returns the month data
   getMonthData(): any {
     return this.monthdata;
   }
+  /* -------------------------------------------------------------------------- */
+  /*                                 Add a month                                */
+  /*                             Used by: leftpanel                             */
+  /* -------------------------------------------------------------------------- */
   addMonth(name: string): Observable<any> {
     // Send the month name in the request body as a JSON object
     const body = { name: name };
     return this.http.post(`${this.path}/monthdata/addMonth`, body);
   }
-
+  /* -------------------------------------------------------------------------- */
+  /*                                 Add a Goal                                 */
+  /*                        Used by: goals & goal-form                          */
+  /* -------------------------------------------------------------------------- */
   addGoal(monthName: string, goalData: any): Observable<any> {
     const body = {
       monthName: monthName,
@@ -54,7 +62,10 @@ export class MonthapiService {
     };
     return this.http.post(`${this.path}/monthdata/addGoal/${monthName}`, body);
   }
-
+  /* -------------------------------------------------------------------------- */
+  /*                           Update a specific Goal                           */
+  /*                        Used by: goals & goal-form                          */
+  /* -------------------------------------------------------------------------- */
   updateGoal(monthName: string, goalData: any): Observable<any> {
     const body = {
       monthName: monthName,
@@ -67,5 +78,21 @@ export class MonthapiService {
       },
     };
     return this.http.patch(`${this.path}/monthdata/updateGoal`, body);
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                               Add a new Note                               */
+  /*                        Used by: notes & note-form                          */
+  /* -------------------------------------------------------------------------- */
+  addNote(monthName: string, noteData: any): Observable<any> {
+    const body = {
+      monthName: monthName,
+      noteData: {
+        title: noteData.name,
+        category: noteData.category,
+        description: noteData.description,
+      },
+    };
+    return this.http.post(`${this.path}/monthdata/addNote/${monthName}`, body);
   }
 }

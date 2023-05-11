@@ -5,6 +5,7 @@ import { MonthapiService } from '../../monthapi.service';
   selector: 'goals',
   templateUrl: './goals.component.html',
   styleUrls: ['./goals.component.scss'],
+  // Use providers to create a new instance of the RoutingService
   providers: [RoutingService],
 })
 export class GoalsComponent implements OnInit {

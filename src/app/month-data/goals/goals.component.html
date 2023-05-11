@@ -7,7 +7,6 @@
           <p class="font-semibold text-base">
             Tilføj keypoint for {{ month.name }}
           </p>
-          <pre> måned valgt {{ monthChosen | json }}</pre>
         </h1>
         <goal-form
           #childSelector
@@ -29,7 +28,7 @@
         <pre> måned {{ month.name | json }}</pre> -->
         <div
           *ngFor="let goal of month.goals"
-          class="p-4 my-4 rounded bg-gray-50 h-auto dark:bg-[#0d1117]"
+          class="p-4 rounded bg-gray-50 h-auto dark:bg-[#0d1117]"
         >
           <span id="goal" class="flex justify-between items-center">
             <p class="goalName text-white text-3xl font-bold">
@@ -66,6 +65,4 @@
       </div>
     </div>
   </div>
-
-
 </section>

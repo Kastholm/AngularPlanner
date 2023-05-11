@@ -1,13 +1,13 @@
 .sectionMonth {
   display: grid;
-  grid-template-columns: auto auto;
-  gap: 4em;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3em 3em;
 }
 
 .taskDone {
   color: rgb(0, 0, 0) !important;
   opacity: 0.4;
-  button{
+  button {
     background: green;
   }
 }

@@ -1,15 +1,13 @@
 <section>
   <div *ngFor="let month of monthdata">
-    <div class="bg-indigo-800 p-12">
+    <div *ngIf="month.name === monthChosen" class="bg-indigo-800 p-12">
       <div class="bg-amber-600 p-12">
         <div class="text-white grid grid-cols-2 mb-8">
           <h1 class="font-bold text-4xl">
-            {{ month.name }}
-            <p class="font-semibold text-base">
-              Tilføj keypoint for ((MånedNavn))
-            </p>
-            <pre> måned navn {{ month.name | json }}</pre>
-            <pre> måned valgt {{ monthChosen | json }}</pre>
+            Noter til {{ month.name }}
+            <p class="font-semibold text-base">Tilføj ny note</p>
+            <!-- <pre> måned navn {{ month.name | json }}</pre>
+            <pre> måned valgt {{ monthChosen | json }}</pre> -->
           </h1>
 
           <!-- Next -->
@@ -35,9 +33,22 @@
                 </button>
               </div>
             </span>
-            <p class="text-lg text-gray-400 mt-4">
-              {{ note.description }}
-            </p>
+            <span >
+              <button class="bg-red-400 p-2 mt-2" (click)="toggleExpand(note)">
+                Expand
+              </button>
+              <p
+                [innerHTML]="parseMarkdown(note.description)"
+                [class.expanded]="note.expanded"
+                [ngClass]="{
+                  'h-32': !note.expanded,
+                  'overflow-hidden': !note.expanded
+                }"
+                class="markdown-body text-lg text-gray-400 mt-4 h-32 overflow-hidden"
+              >
+                {{ note.description }}
+              </p>
+            </span>
             <span class="mt-3 flex items-center gap-5">
               <p class="text-sm text-gray-400">🔴 {{ note.category }}</p>
               <!--  <a href="#" class="text-sm text-gray-400">⭐ 2</a>

@@ -22,7 +22,7 @@ export class GoalFormComponent implements OnInit {
     private routing: RoutingService
   ) {
     //dev purpose
-    console.log('Du er på måned', routing.monthChosen);
+    console.log('Du er på goal måned', routing.monthChosen);
   }
   ngOnInit() {
     // Initialize the correct monthName depending on the month chosen
@@ -48,6 +48,7 @@ export class GoalFormComponent implements OnInit {
         <option selected>Vælg kategori</option>
         <option value="Hjemmeside">Hjemmeside</option>
         <option value="Backend">Backend</option>
+        <option value="Frontend">Frontend</option>
         <option value="Homeassistant">Homeassistant</option>
         <option value="Study">Study</option>
         <option value="Web Environment">Web Environment</option>
@@ -73,7 +74,7 @@ export class GoalFormComponent implements OnInit {
     `;
 
     const { value: formValues } = await Swal.fire({
-      title: 'Add New Goal',
+      title: 'Tilføj nyt mål',
       html: formHtml,
       focusConfirm: false,
       // Sets the HTML for the popup

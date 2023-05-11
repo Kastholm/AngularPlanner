@@ -35,7 +35,7 @@ const monthSchema = new Schema({
   goals: [goalSchema],
   learned: [childSchema],
   made: [childSchema],
-  notes: [childSchema],
+  notes: [childSchema], 
 });
 
 // Create the Month model based on the monthSchema
@@ -55,7 +55,7 @@ async function dbConnection() {
 dbConnection();
 
 /* -------------------------------------------------------------------------- */
-/*                                   ROUTES                                   */
+/*                               GENERAL ROUTES                               */
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
 /*                                 Router.get                                 */
@@ -86,6 +86,9 @@ router.post("/addMonth", async (req, res) => {
     res.json({ message: err });
   }
 });
+/* -------------------------------------------------------------------------- */
+/*                               GOAL ROUTES                               */
+/* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
 /*                                 Router.post                                */
 /*                  Purpose: Add a new goal to a specific month               */
@@ -159,6 +162,39 @@ router.patch("/updateGoal", async (req, res) => {
 /*                                 Router.post                                */
 /*                  Purpose: Duplicating monthgoals into another month        */
 /* -------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/*                                  NOTE ROUTES                               */
+/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                 Router.post                                */
+/*                  Purpose: Add a new NOTE to a specific month               */
+/* -------------------------------------------------------------------------- */
+router.post("/addNote/:name", async (req, res) => {
+  try {
+    // Declare needed value
+    // monthName to differentiate between months
+    // noteData to get the data from the body, so it can be posted to the database
+    const { monthName, noteData } = req.body;
+    // Find the month by its title
+    const month = await Month.findOne({ name: monthName /* "TestMonth" */ });
+    // Set the values for the new note
+    // OBS Kan dette referes til schema istedet?
+    const newNote = {
+      title: noteData.title,
+      category: noteData.category,
+      description: noteData.description,
+    };
+    // Pushing the newNote to the database
+    month.notes.push(newNote);
+    // Save the updated month to the database
+    await month.save();
+    // Output the data to the console
+    res.json(month);
+  } catch (err) {
+    res.json("err");
+  }
+});
 
 /* -------------------------------------------------------------------------- */
 /*                              Export the router                             */

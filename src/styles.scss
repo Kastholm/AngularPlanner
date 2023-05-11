@@ -4,4 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 //Getting darkmode for SweetAlert2
-@import '@sweetalert2/theme-dark/dark.scss';
+@import "@sweetalert2/theme-dark/dark.scss";
+//Getting Github Markdown CSS
+@import "github-markdown-css/github-markdown.css";

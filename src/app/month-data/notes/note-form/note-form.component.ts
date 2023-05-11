@@ -30,8 +30,6 @@ export class NoteFormComponent implements OnInit {
 
   isExpanded = false;
 
- 
-
   parseMarkdown(content: string): string {
     return marked(content);
   }
@@ -147,4 +145,27 @@ export class NoteFormComponent implements OnInit {
       console.log('Note values', noteValues);
     }
   }
+
+  // Laver selve skeletet af hvilken data der skal offentliggøres til parent
+  /* @Output() sendDataToParent = new EventEmitter<{
+    title: string;
+    category: string;
+    description: string;
+  }>(); */
+  
+  sendEmitDataEvent(title: string, category: string, description: string) {
+    /* this.updateNote(title, category, description); */
+  }
+  
+  updateNote(title: string, category: string, description: string) {
+    console.log('title, category, description', title, category, description);
+  }
+  // Definerer en funktion der kan udløse den emittede data fra child til parent
+  // Denne funktion skal bruges i parent komponenten for at modtage dataen fra den emittede data
+  // sendDataEvent() laves for at vi kan udløse den emittede data fra child til parent via et event som fx. click()
+  /* this.sendDataToParent.emit({
+    title,
+    category,
+    description,
+  }); */
 }

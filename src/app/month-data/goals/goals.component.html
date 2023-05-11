@@ -2,16 +2,18 @@
   <div *ngFor="let month of monthdata">
     <div *ngIf="month.name === monthChosen" class="bg-indigo-800 p-12">
       <div class="p-12">
+        <h1 class="text-6xl bold mb-8">{{month.name}}</h1>
         <div class="text-white grid grid-cols-2 mb-8 ">
-          <h1 class="font-bold text-4xl">
-            {{ month.name }}
+          <h1 class="font-bold text-2xl">
+            Tilføj goal til {{ month.name }}
             <p class="font-semibold text-base">
               Tilføj keypoint for {{ month.name }}
             </p>
           </h1>
           <goal-form
             #childSelector
-            (requestUpdateGoal)="
+          ></goal-form>
+         <!--  (requestUpdateGoal)="
               updateGoal(
                 $event.title,
                 $event.category,
@@ -19,8 +21,7 @@
                 $event.importance,
                 $event.completed
               )
-            "
-          ></goal-form>
+            " - tror ikke nødvendig -->
         </div>
         <div class="sectionMonth">
           <!-- <p>her</p> -->
@@ -49,7 +50,7 @@
                   "
                   class="hover:border-white text-white bg-[#21262d] p-2 border border-gray-600 rounded-lg"
                 >
-                  ✅ Update
+                  ✅ Opdater
                 </button>
               </div>
             </span>

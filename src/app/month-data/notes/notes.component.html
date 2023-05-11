@@ -11,8 +11,12 @@
           </h1>
 
           <!-- Next -->
-
-          <note-form></note-form>
+          <!-- Lytter til EventEmitteren fra child returnDetailsToParent() -->
+          <!-- event binding (returnDetailsToParent)="receiveDetailsFromChild($event)" 
+          Dette fortæller Angular at når returnDetailsToParent begivenheden udløses fra Child-komponenten, skal den kalde receiveDetailsFromChild() funktionen i Parent-komponenten og sende begivenhedsdataene ($event) som argument.
+        -->
+        <!-- #childSelector -->
+          <note-form #helloWorld></note-form>
         </div>
         <div class="sectionNotes">
           <!-- <p>her</p> -->
@@ -26,14 +30,35 @@
             <span class="flex justify-between items-center">
               <p class="text-white text-3xl font-bold">{{ note.title }}</p>
               <div class="flex">
+                <!-- Telling parent to update with the 3 parameters below in (note-form.cp.ts) -->
+               <!--  (click)="
+                releaseEmitDataEvent(
+                  note.title,
+                  note.category,
+                  note.description
+                )
+              " -->
                 <button
+                  
                   class="hover:border-white text-white bg-[#21262d] p-2 border border-gray-600 rounded-lg"
                 >
-                  ✅ Done
+                  ✅ Opdater
+                </button>
+                
+                <button
+                (click)="
+                helloWorld.updateNote(
+                  note.title,
+                  note.category,
+                  note.description
+                )
+              "
+                >
+                  tesst 
                 </button>
               </div>
             </span>
-            <span >
+            <span>
               <button class="bg-red-400 p-2 mt-2" (click)="toggleExpand(note)">
                 Expand
               </button>

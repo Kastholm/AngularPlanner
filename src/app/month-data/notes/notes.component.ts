@@ -4,8 +4,8 @@ import { MonthapiService } from '../../monthapi.service';
 // Importing needed packages
 // @ts-ignore
 import { marked } from 'marked';
-import { mangle } from 'marked-mangle';
-import { gfmHeadingId } from 'marked-gfm-heading-id';
+//import { mangle } from 'marked-mangle';
+//import { gfmHeadingId } from 'marked-gfm-heading-id';
 @Component({
   selector: 'notes',
   templateUrl: './notes.component.html',
@@ -18,8 +18,8 @@ export class NotesComponent implements OnInit {
     private routing: RoutingService,
     private monthApi: MonthapiService
   ) {
-    marked.use(mangle());
-    marked.use(gfmHeadingId());
+    //marked.use(mangle());
+    //marked.use(gfmHeadingId());
   }
 
   // Fetch data and set month data - returns a promise
@@ -49,4 +49,21 @@ export class NotesComponent implements OnInit {
   toggleExpand(note: any) {
     note.expanded = !note.expanded;
   }
+
+  // Definer strukturen
+ /*  receivedDataFromChild(note: {
+    title: string;
+    category: string;
+    description: string;
+  }) {
+    console.log('receivedDataFromChild called' +  note.title + note.category + note.description);
+  } */
+  //Knappen
+ /*  releaseEmitDataEvent(title: string, category: string, description: string) {
+    this.receivedDataFromChild({
+      title,
+      category,
+      description,
+    });
+  } */
 }

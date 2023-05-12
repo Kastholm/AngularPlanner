@@ -37,6 +37,9 @@ export class MonthapiService {
     return this.monthdata;
   }
   /* -------------------------------------------------------------------------- */
+  /*                                 GOAL ROUTES                                */
+  /* -------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------- */
   /*                                 Add a month                                */
   /*                             Used by: leftpanel                             */
   /* -------------------------------------------------------------------------- */
@@ -79,7 +82,9 @@ export class MonthapiService {
     };
     return this.http.patch(`${this.path}/monthdata/updateGoal`, body);
   }
-
+  /* -------------------------------------------------------------------------- */
+  /*                                 NOTE ROUTES                                */
+  /* -------------------------------------------------------------------------- */
   /* -------------------------------------------------------------------------- */
   /*                               Add a new Note                               */
   /*                        Used by: notes & note-form                          */
@@ -95,6 +100,32 @@ export class MonthapiService {
     };
     return this.http.post(`${this.path}/monthdata/addNote/${monthName}`, body);
   }
+  /* -------------------------------------------------------------------------- */
+  /*                                Update a Note                               */
+  /*                        Used by: notes & note-form                          */
+  /* -------------------------------------------------------------------------- */
+  updateNote(
+    monthName: string,
+    noteData: any,
+    noteId: string
+  ): Observable<any> {
+    const body = {
+      monthName: monthName,
+      noteData: {
+        title: noteData.name,
+        category: noteData.category,
+        description: noteData.description,
+      },
+      noteId: noteId
+    };
+    return this.http.patch(
+      `${this.path}/monthdata/updateNote/${monthName}/${noteId}`,
+      body
+    );
+  }
+  /* -------------------------------------------------------------------------- */
+  /*                               LEARNED ROUTES                               */
+  /* -------------------------------------------------------------------------- */
   /* -------------------------------------------------------------------------- */
   /*                             Add a new Learned                              */
   /*                        Used by: learned & learned-form                     */
@@ -113,4 +144,7 @@ export class MonthapiService {
       body
     );
   }
+  /* -------------------------------------------------------------------------- */
+  /*                                 **** ROUTES                                */
+  /* -------------------------------------------------------------------------- */
 }

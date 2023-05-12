@@ -195,6 +195,52 @@ router.post("/addNote/:name", async (req, res) => {
     res.json("err");
   }
 });
+/* -------------------------------------------------------------------------- */
+/*                                Router.patch                                */
+/*                     Purpose: Edit a specific Note by ID                    */
+/* -------------------------------------------------------------------------- */
+router.patch("/updateNote/:monthName/:noteId", async (req, res) => {
+  try {
+    // Data we want to receive from the params
+    const { monthName, noteId } = req.params;
+    // Data we want to receive from the body
+    const { title, category, description } = req.body.noteData;
+    // Use the Schema to collect data from the correct DB
+    const month = await Month.findOne({ name: monthName });
+    // Find the note by its title in the month's notes array
+    const noteIndex = month.notes.findIndex((note) => note.id === noteId);
+    // If the note is not found, return an error
+    if (noteIndex === -1) {
+      res.status(404).json({ message: "Note not found" });
+      return;
+    }
+    // If the title is changed, update the title
+    if (title !== undefined) {
+      month.notes[noteIndex].title = title;
+    }
+    // If the category is changed, update the category
+    if (category !== undefined) {
+      month.notes[noteIndex].category = category;
+    }
+    // If the description is changed, update the description
+    if (description !== undefined) {
+      month.notes[noteIndex].description = description;
+    }
+    // Save the updated note to the database
+    await month.save();
+    res.status(200).json({ message: "Note updated successfully", month });
+  } catch (err) {
+   res.status(500).json({ message: "An error occurred" });
+  }
+});
+// Make a form for the updated note
+/* const updatedNote = {
+  title: noteData.title,
+  category: noteData.category,
+  description: noteData.description,
+}; */
+// push the updated note to the database
+/* month.notes.push(updatedNote); */
 
 /* -------------------------------------------------------------------------- */
 /*                               LEARNED ROUTES                               */

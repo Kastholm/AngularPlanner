@@ -230,18 +230,9 @@ router.patch("/updateNote/:monthName/:noteId", async (req, res) => {
     await month.save();
     res.status(200).json({ message: "Note updated successfully", month });
   } catch (err) {
-   res.status(500).json({ message: "An error occurred" });
+    res.status(500).json({ message: "An error occurred" });
   }
 });
-// Make a form for the updated note
-/* const updatedNote = {
-  title: noteData.title,
-  category: noteData.category,
-  description: noteData.description,
-}; */
-// push the updated note to the database
-/* month.notes.push(updatedNote); */
-
 /* -------------------------------------------------------------------------- */
 /*                               LEARNED ROUTES                               */
 /* -------------------------------------------------------------------------- */
@@ -263,6 +254,37 @@ router.post("/addLearned/:name", async (req, res) => {
     res.json(month);
   } catch (err) {
     res.json("err");
+  }
+});
+/* -------------------------------------------------------------------------- */
+/*                                Router.patch                                */
+/*                   Purpose: Edit a specific Learned by ID                   */
+/* -------------------------------------------------------------------------- */
+router.patch("/updateLearned/:monthName/:learnedId", async (req, res) => {
+  try {
+    const { monthName, learnedId } = req.params;
+    const { title, category, description } = req.body.learnedData;
+    const month = await Month.findOne({ name: monthName });
+    const learnedIndex = month.learned.findIndex(
+      (learned) => learned.id === learnedId
+    );
+    if (learnedIndex === -1) {
+      res.status(404).json({ message: "Learned not found" });
+      return;
+    }
+    if (title !== undefined) {
+      month.learned[learnedIndex].title = title;
+    }
+    if (category !== undefined) {
+      month.learned[learnedIndex].category = category;
+    }
+    if (description !== undefined) {
+      month.learned[learnedIndex].description = description;
+    }
+    await month.save();
+    res.status(200).json({ message: "Learned updated successfully", month });
+  } catch (err) {
+    res.status(500).json({ message: "An error occurred" });
   }
 });
 

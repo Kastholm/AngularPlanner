@@ -116,7 +116,7 @@ export class MonthapiService {
         category: noteData.category,
         description: noteData.description,
       },
-      noteId: noteId
+      noteId: noteId,
     };
     return this.http.patch(
       `${this.path}/monthdata/updateNote/${monthName}/${noteId}`,
@@ -141,6 +141,29 @@ export class MonthapiService {
     };
     return this.http.post(
       `${this.path}/monthdata/addLearned/${monthName}`,
+      body
+    );
+  }
+  /* -------------------------------------------------------------------------- */
+  /*                                Update a Learned                            */
+  /*                        Used by: learned & learned-form                     */
+  /* -------------------------------------------------------------------------- */
+  updateLearned(
+    monthName: string,
+    learnedData: any,
+    learnedId: string
+  ): Observable<any> {
+    const body = {
+      monthName: monthName,
+      learnedData: {
+        title: learnedData.name,
+        category: learnedData.category,
+        description: learnedData.description,
+      },
+      learnedId: learnedId,
+    };
+    return this.http.patch(
+      `${this.path}/monthdata/updateLearned/${monthName}/${learnedId}`,
       body
     );
   }

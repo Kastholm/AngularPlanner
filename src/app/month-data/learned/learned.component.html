@@ -1,7 +1,7 @@
 <section>
   <div *ngFor="let month of monthdata">
-    <div *ngIf="month.name === monthChosen" class="bg-indigo-800 p-12">
-      <div class="bg-emerald-700 p-12">
+    <div *ngIf="month.name === monthChosen" class="px-24 py-10">
+      <div class="monthSection">
         <div class="text-white grid grid-cols-2 mb-8">
           <h1 class="font-bold text-4xl">
             Du har lært i {{ month.name }}
@@ -12,7 +12,7 @@
 
           <!-- Next -->
 
-          <learned-form></learned-form>
+          <learned-form #LearnedForm></learned-form>
         </div>
         <div class="sectionMonth">
           <!-- <p>her</p> -->
@@ -21,15 +21,23 @@
            <pre> måned {{ month.name | json }}</pre> -->
           <div
             *ngFor="let learned of month.learned"
-            class="p-4 my-4 rounded bg-gray-50 h-auto dark:bg-[#0d1117]"
+            class="contentBox"
           >
             <span class="flex justify-between items-center">
               <p class="text-white text-3xl font-bold">{{ learned.title }}</p>
               <div class="flex">
                 <button
+                  (click)="
+                    LearnedForm.updateLearned(
+                      learned.title,
+                      learned.category,
+                      learned.description,
+                      learned._id
+                    )
+                  "
                   class="hover:border-white text-white bg-[#21262d] p-2 border border-gray-600 rounded-lg"
                 >
-                  ✅ Done
+                  ✅ Opdater
                 </button>
               </div>
             </span>

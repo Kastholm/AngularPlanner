@@ -66,21 +66,29 @@ export class MonthapiService {
     return this.http.post(`${this.path}/monthdata/addGoal/${monthName}`, body);
   }
   /* -------------------------------------------------------------------------- */
-  /*                           Update a specific Goal                           */
-  /*                        Used by: goals & goal-form                          */
+  /*                                   Update a Goal                            */
+  /*                             Used by: goals & goal-form                     */
   /* -------------------------------------------------------------------------- */
-  updateGoal(monthName: string, goalData: any): Observable<any> {
+  updateGoal(
+    monthName: string,
+    goalData: any,
+    goalId: string
+  ): Observable<any> {
     const body = {
       monthName: monthName,
       goalData: {
-        title: goalData.title,
+        title: goalData.name,
         category: goalData.category,
         description: goalData.description,
         importance: goalData.importance,
         completed: goalData.completed,
       },
+      goalId: goalId,
     };
-    return this.http.patch(`${this.path}/monthdata/updateGoal`, body);
+    return this.http.patch(
+      `${this.path}/monthdata/updateGoal/${monthName}/${goalId}`,
+      body
+    );
   }
   /* -------------------------------------------------------------------------- */
   /*                                 NOTE ROUTES                                */

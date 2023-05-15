@@ -9,7 +9,6 @@ import { MonthDataComponent } from './month-data/month-data.component';
 import { GoalsComponent } from './month-data/goals/goals.component';
 import { NotesComponent } from './month-data/notes/notes.component';
 import { LearnedComponent } from './month-data/learned/learned.component';
-import { CompletedComponent } from './month-data/completed/completed.component';
 //Subcomponents
 import { GoalFormComponent } from './month-data/goals/goal-form/goal-form.component';
 import { NoteFormComponent } from './month-data/notes/note-form/note-form.component';
@@ -27,7 +26,6 @@ const appRoutes: Routes = [
     GoalsComponent,
     NotesComponent,
     LearnedComponent,
-    CompletedComponent,
     GoalFormComponent,
     NoteFormComponent,
     LearnedFormComponent,

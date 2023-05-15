@@ -1,11 +1,13 @@
+@import '../month-data.component.scss';
 .sectionMonth {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 3em 3em;
 }
 
-.taskDone {
+.goalCompleted {
   color: rgb(0, 0, 0) !important;
+  background-color: green;
   opacity: 0.4;
   button {
     background: green;

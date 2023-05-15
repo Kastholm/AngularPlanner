@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RoutingService } from '../routing.service';
 import { MonthapiService } from '../../monthapi.service';
+import { marked } from 'marked';
 @Component({
   selector: 'goals',
   templateUrl: './goals.component.html',
@@ -26,8 +27,13 @@ export class GoalsComponent implements OnInit {
   get monthdata() {
     return this.routing.monthdata;
   }
+  //Loading Markdown
 
-  updateGoal(
+  parseMarkdown(content: string): string {
+    return marked(content);
+  }
+
+ /*  updateGoal(
     title: string,
     category: string,
     description: string,
@@ -43,24 +49,24 @@ export class GoalsComponent implements OnInit {
       importance,
       completed
     );
-  }
+  } */
 
-  doneTask(goalName: string) {
-    document.querySelectorAll('.goalName').forEach((goal, index) => {
-      // If goal title === goal.textContent then call the doneTask function
-      if (goalName === goal.textContent?.trim()) {
-        // Send data to DB
-        /* this.monthApi.goalStatus(this.monthChosen, goalName, true); */
-        console.log(
-          'doneTask component function called',
-          this.monthChosen,
-          goalName
-        );
-        //target the granparent
-        /* if (goal.parentElement && goal.parentElement.parentElement) {
-          goal.parentElement.parentElement.classList.add('taskDone');
-        } */
-      }
-    });
-  }
+  //doneTask(goalName: string) {
+  //  document.querySelectorAll('.goalName').forEach((goal, index) => {
+  //    // If goal title === goal.textContent then call the doneTask function
+  //    if (goalName === goal.textContent?.trim()) {
+  //      // Send data to DB
+  //      /* this.monthApi.goalStatus(this.monthChosen, goalName, true); */
+  //      console.log(
+  //        'doneTask component function called',
+  //        this.monthChosen,
+  //        goalName
+  //      );
+  //      //target the granparent
+  //      /* if (goal.parentElement && goal.parentElement.parentElement) {
+  //        goal.parentElement.parentElement.classList.add('taskDone');
+  //      } */
+  //    }
+  //  });
+  //}
 }

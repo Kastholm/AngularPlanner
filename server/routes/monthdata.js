@@ -118,46 +118,42 @@ router.post("/addGoal/:name", async (req, res) => {
   }
 });
 /* -------------------------------------------------------------------------- */
-/*                                 Router.patch                               */
-/*                       Purpose: Update content of a goal                    */
+/*                                Router.patch                                */
+/*                   Purpose: Edit a specific Goal by ID                   */
 /* -------------------------------------------------------------------------- */
-router.patch("/updateGoal", async (req, res) => {
+router.patch("/updateGoal/:monthName/:goalId", async (req, res) => {
   try {
-    const { monthName, goalData } = req.body;
-
-    // Find the month by its name
+    const { monthName, goalId } = req.params;
+    const { title, category, description, importance, completed } =
+      req.body.goalData;
     const month = await Month.findOne({ name: monthName });
-
-    // If month doesn't exist, return error
-    if (!month) {
-      return res.status(404).json({ message: "Month not found" });
-    }
-
-    // Find the goal by its title in the month's goals array
-    const goalIndex = month.goals.findIndex(
-      (goal) => goal.title === goalData.title
-    );
-
-    // If the goal is not found, return an error
+    const goalIndex = month.goals.findIndex((goal) => goal.id === goalId);
     if (goalIndex === -1) {
-      return res.status(404).json({ message: "Goal not found" });
+      res.status(404).json({ message: "Goal not found" });
+      return;
     }
-
-    // Update the goal with the provided data
-    month.goals[goalIndex] = {
-      ...month.goals[goalIndex],
-      ...goalData,
-    };
-
-    // Save the updated month document
+    if (title !== undefined) {
+      month.goals[goalIndex].title = title;
+    }
+    if (category !== undefined) {
+      month.goals[goalIndex].category = category;
+    }
+    if (description !== undefined) {
+      month.goals[goalIndex].description = description;
+    }
+    if (importance !== undefined) {
+      month.goals[goalIndex].importance = importance;
+    }
+    if (completed !== undefined) {
+      month.goals[goalIndex].completed = completed;
+    }
     await month.save();
-
-    // Send a success response
-    res.json({ message: "Goal updated successfully", month });
+    res.status(200).json({ message: "Goal updated successfully", month });
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ message: "An error occurred" });
   }
 });
+
 /* -------------------------------------------------------------------------- */
 /*                                 Router.post                                */
 /*                  Purpose: Duplicating monthgoals into another month        */

@@ -1,8 +1,8 @@
 <section>
   <div *ngFor="let month of monthdata">
-    <div *ngIf="month.name === monthChosen" class="bg-indigo-800 p-12">
-      <div class="bg-amber-600 p-12">
-        <div class="text-white grid grid-cols-2 mb-8">
+    <div *ngIf="month.name === monthChosen" class="px-24 py-10">
+      <div class="monthSection">
+        <div class="text-white grid grid-cols-2 mb-2">
           <h1 class="font-bold text-4xl">
             Noter til {{ month.name }}
             <p class="font-semibold text-base">Tilføj ny note</p>
@@ -25,7 +25,7 @@
         <pre> måned {{ month.name | json }}</pre> -->
           <div
             *ngFor="let note of month.notes"
-            class="p-4 my-4 rounded bg-gray-50 h-auto dark:bg-[#0d1117]"
+            class="contentBox"
           >
             <span class="flex justify-between items-center">
               <p class="text-white text-3xl font-bold">{{ note.title }}</p>

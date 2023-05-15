@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SlackDashboardComponent } from './slack-dashboard.component';
+import { ShoppingListComponent } from './shopping-list.component';
 
-describe('SlackDashboardComponent', () => {
-  let component: SlackDashboardComponent;
-  let fixture: ComponentFixture<SlackDashboardComponent>;
+describe('ShoppingListComponent', () => {
+  let component: ShoppingListComponent;
+  let fixture: ComponentFixture<ShoppingListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SlackDashboardComponent ]
+      declarations: [ ShoppingListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SlackDashboardComponent);
+    fixture = TestBed.createComponent(ShoppingListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

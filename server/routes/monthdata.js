@@ -42,19 +42,6 @@ const monthSchema = new Schema({
 const Month = mongoose.model("Month", monthSchema);
 
 /* -------------------------------------------------------------------------- */
-/*            Connection to MongoDB Database and collection "months"          */
-/* -------------------------------------------------------------------------- */
-async function dbConnection() {
-  // Get the connection string from the .env file and append the database name
-  const connectionString = `${process.env.MONGODB_URL}/monthplanner`;
-  await mongoose.connect(connectionString, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-}
-dbConnection();
-
-/* -------------------------------------------------------------------------- */
 /*                               GENERAL ROUTES                               */
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */

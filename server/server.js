@@ -3,6 +3,7 @@
 /* -------------------------------------------------------------------------- */
 // Loading Express
 const express = require("express");
+const mongoose = require("mongoose");
 // Loading CORS (Cross-Origin Resource Sharing)
 const cors = require("cors");
 //Loading body-parser to parse incoming request bodies
@@ -32,9 +33,25 @@ app.use(express.json());
 
 //getting the route file from the routes folder
 const monthdata = require("./routes/monthdata");
-
+const shoppingdata = require("./routes/shoppingdata");
 //url call
 app.use("/monthdata", monthdata);
+app.use("/shoppingdata", shoppingdata);
+
+/* -------------------------------------------------------------------------- */
+/*                    Connection to MongoDB Database and collections          */
+/* -------------------------------------------------------------------------- */
+async function monthConnection() {
+  const connectionString = `${process.env.MONGODB_URL}/monthplanner`;
+  const monthConnection = await mongoose.connect(connectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  return monthConnection;
+}
+
+// Store the connection objects
+const monthDbConnection = monthConnection();
 
 /* -------------------------------------------------------------------------- */
 /*                    Setting port for the server to run on                   */

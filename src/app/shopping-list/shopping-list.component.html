@@ -1,43 +1,35 @@
 <section class="px-24 py-10">
-     <div
-       class="h-screen rounded-lg mx-auto p-20 bg-gradient-to-r from-indigo-900 via-blue-900 to-indigo-700"
-     >
-       <span><h1 class="text-4xl bold mb-8">Your Dashboard</h1></span>
-       <div  class="flex">
-        <p> Vejret </p>
-        <p> Location</p>
-        <p> Klokken</p>
-        <p> ur</p>
-       </div>
-       <div class="grid grid-cols-2 gap-4">
-         <span class="contentBox">
-           <h2 class="contentTitle">Vigtige Datoer</h2>
-           <span
-             ><p class="mt-2 text-1xl">Albert dåb 3 Septemper</p>
-             <p class="mt-2 text-1xl">Albert dåb 3 Septemper</p>
-             <p class="mt-2 text-1xl">Albert dåb 3 Septemper</p></span
-           >
-         </span>
-         <span class="contentBox">
-             <h2 class="contentTitle">Status</h2>
-             <span>
-                  <p class="mt-2 text-1xl">Synology Status</p>
-                  <p class="mt-2 text-1xl">HomeAssistand Status</p>
-             </span>
-         </span>
-         <span class="contentBox">
-             <h2 class="contentTitle">Status</h2>
-             <span>
-                  <button class="bg-red-200 mt-2 text-1xl">Home Assistant Hub</button>
-             </span>
-         </span>
-         <span class="contentBox">
-             <h2 class="contentTitle">Links</h2>
-             <span>
-                  <button class="bg-red-200 mt-2 text-1xl">Home Assistant Hub</button>
-             </span>
-         </span>
-       </div>
-     </div>
-   </section>
-   
+  <div
+    class="min-h-screen rounded-lg mx-auto p-20 bg-gradient-to-r from-indigo-900 via-blue-900 to-indigo-700"
+  >
+    <div class="flex">
+      <h1 class="text-6xl bold mb-8">List</h1>
+      <button (click)="addNewItem()" class="ml-auto bg-red-200 h-fit p-4">
+        Tilføj ny
+      </button>
+    </div>
+    <div class="sectionItems grid grid-cols-3 gap-4">
+      <div *ngFor="let item of shoppingData" class="contentBox">
+        <span class="flex justify-between items-center">
+          <p class="text-white text-3xl font-bold">{{ item.name }}</p>
+          <div class="flex">
+            <button (click)="deleteItem(item._id)"
+              class="hover:border-white text-white bg-[#21262d] p-2 border border-gray-600 rounded-lg"
+            >
+              ❌ Delete
+            </button>
+          </div>
+        </span>
+        <span>
+          <p
+            [innerHTML]="parseMarkdown(item.description)"
+            class="markdown-body text-lg text-gray-400 mt-4 p-2 overflow-hidden"
+          >
+            {{ item.description }}
+          </p>
+        </span>
+        <span class="mt-3 flex items-center gap-5"> </span>
+      </div>
+    </div>
+  </div>
+</section>

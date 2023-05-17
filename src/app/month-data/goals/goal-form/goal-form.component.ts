@@ -4,8 +4,8 @@
 //Importing the needed modules
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 // Importing Services
-import { MonthapiService } from '../../../monthapi.service';
-import { RoutingService } from '../../routing.service';
+import { MonthapiService } from '../../services/monthapi.service';
+import { RoutingService } from '../../services/routing.service';
 // Importing needed packages
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { marked } from 'marked';

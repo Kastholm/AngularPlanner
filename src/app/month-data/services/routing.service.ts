@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MonthapiService } from '../monthapi.service';
+import { MonthapiService } from './monthapi.service';
 import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../global.service';
+import { GlobalService } from '../../services/global.service';
 @Injectable({
   providedIn: 'root',
 })

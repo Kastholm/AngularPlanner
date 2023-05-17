@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RoutingService } from '../routing.service';
-import { MonthapiService } from '../../monthapi.service';
+import { RoutingService } from '../services/routing.service';
+import { MonthapiService } from '../services/monthapi.service';
 import { marked } from 'marked';
 @Component({
   selector: 'goals',
@@ -32,41 +32,4 @@ export class GoalsComponent implements OnInit {
   parseMarkdown(content: string): string {
     return marked(content);
   }
-
- /*  updateGoal(
-    title: string,
-    category: string,
-    description: string,
-    importance: number,
-    completed: boolean
-  ) {
-    console.log('updateGoal Parent called');
-    console.log(
-      'updateGoal Parent called with data:',
-      title,
-      category,
-      description,
-      importance,
-      completed
-    );
-  } */
-
-  //doneTask(goalName: string) {
-  //  document.querySelectorAll('.goalName').forEach((goal, index) => {
-  //    // If goal title === goal.textContent then call the doneTask function
-  //    if (goalName === goal.textContent?.trim()) {
-  //      // Send data to DB
-  //      /* this.monthApi.goalStatus(this.monthChosen, goalName, true); */
-  //      console.log(
-  //        'doneTask component function called',
-  //        this.monthChosen,
-  //        goalName
-  //      );
-  //      //target the granparent
-  //      /* if (goal.parentElement && goal.parentElement.parentElement) {
-  //        goal.parentElement.parentElement.classList.add('taskDone');
-  //      } */
-  //    }
-  //  });
-  //}
 }

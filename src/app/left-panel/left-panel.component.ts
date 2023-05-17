@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MonthapiService } from '../monthapi.service';
-import { RoutingService } from '../month-data/routing.service';
+import { MonthapiService } from '../month-data/services/monthapi.service';
+import { RoutingService } from '../month-data/services/routing.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RoutingService } from '../routing.service';
-import { MonthapiService } from '../../monthapi.service';
+import { RoutingService } from '../services/routing.service';
+import { MonthapiService } from '../services/monthapi.service';
 // Importing needed packages
 // @ts-ignore
 import { marked } from 'marked';
@@ -51,7 +51,7 @@ export class NotesComponent implements OnInit {
   }
 
   // Definer strukturen
- /*  receivedDataFromChild(note: {
+  /*  receivedDataFromChild(note: {
     title: string;
     category: string;
     description: string;
@@ -59,7 +59,7 @@ export class NotesComponent implements OnInit {
     console.log('receivedDataFromChild called' +  note.title + note.category + note.description);
   } */
   //Knappen
- /*  releaseEmitDataEvent(title: string, category: string, description: string) {
+  /*  releaseEmitDataEvent(title: string, category: string, description: string) {
     this.receivedDataFromChild({
       title,
       category,

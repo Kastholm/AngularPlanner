@@ -4,8 +4,8 @@
 //Importing the needed modules
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 // Importing Services
-import { MonthapiService } from '../../../monthapi.service';
-import { RoutingService } from '../../routing.service';
+import { MonthapiService } from '../../services/monthapi.service';
+import { RoutingService } from '../../services/routing.service';
 // Importing needed packages
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { marked } from 'marked';
@@ -255,13 +255,18 @@ export class NoteFormComponent implements OnInit {
   /* -------------------------------------------------------------------------- */
   /*                       UPDATE THE NOTE IN THE DATABASE                      */
   /* -------------------------------------------------------------------------- */
-  async updateNote(title: string, category: string, description: string, noteId: string) {
+  async updateNote(
+    title: string,
+    category: string,
+    description: string,
+    noteId: string
+  ) {
     //Funtion som aktiveres af parent
     console.log('title, category, description', title, category, description);
     const { value: updateNoteValues } = await this.updateNoteAlert(
       title,
       category,
-      description,
+      description
     );
 
     if (updateNoteValues) {

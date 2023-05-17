@@ -14,13 +14,11 @@ import { GoalFormComponent } from './month-data/goals/goal-form/goal-form.compon
 import { NoteFormComponent } from './month-data/notes/note-form/note-form.component';
 import { LearnedFormComponent } from './month-data/learned/learned-form/learned-form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeassistantDashboardComponent } from './homeassistant-dashboard/homeassistant-dashboard.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 //Routes from NgModules
 const appRoutes: Routes = [
   { path: 'month/:month', component: MonthDataComponent },
   { path: '', component: DashboardComponent },
-  { path: 'homeassistant', component: HomeassistantDashboardComponent },
   { path: 'shoppinglist', component: ShoppingListComponent },
 ];
 
@@ -36,7 +34,6 @@ const appRoutes: Routes = [
     NoteFormComponent,
     LearnedFormComponent,
     DashboardComponent,
-    HomeassistantDashboardComponent,
     ShoppingListComponent,
   ],
   imports: [BrowserModule, HttpClientModule, RouterModule.forRoot(appRoutes)],

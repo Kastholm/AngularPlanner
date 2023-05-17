@@ -41,17 +41,17 @@ app.use("/shoppingdata", shoppingdata);
 /* -------------------------------------------------------------------------- */
 /*                    Connection to MongoDB Database and collections          */
 /* -------------------------------------------------------------------------- */
-async function monthConnection() {
+async function mongoConnection() {
   const connectionString = `${process.env.MONGODB_URL}/monthplanner`;
-  const monthConnection = await mongoose.connect(connectionString, {
+  const mongoConnection = await mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  return monthConnection;
+  return mongoConnection;
 }
 
 // Store the connection objects
-const monthDbConnection = monthConnection();
+const mongoDbConnection = mongoConnection();
 
 /* -------------------------------------------------------------------------- */
 /*                    Setting port for the server to run on                   */

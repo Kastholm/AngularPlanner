@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RoutingService } from '../routing.service';
-import { MonthapiService } from '../../monthapi.service';
+import { RoutingService } from '../services/routing.service';
+import { MonthapiService } from '../services/monthapi.service';
 // Importing needed packages
 // @ts-ignore
 import { marked } from 'marked';

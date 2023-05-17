@@ -2,9 +2,49 @@
   @apply px-10 py-6 rounded-lg bg-gray-50 h-auto bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900;
 }
 .contentTitle {
-     @apply  text-2xl;
+  @apply text-2xl;
 }
 
+
 iframe {
-  @apply w-screen h-screen;
+  width: 100%;
+  height: 60em;
+  border: none;
+  border-radius: 10px;
+}
+
+
+.linksBox {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 1fr 1fr;
+  .buttonLink {
+    position: relative;
+    overflow: hidden;
+    img {
+      position: absolute;
+      left: 0px;
+      bottom: 0px;
+      border-radius: 10px;
+      width: 6em;
+    }
+    button {
+      padding: 2em;
+      width: 16vw;
+      border-radius: 10px;
+      box-shadow: 0px 4px 4px rgba(231, 226, 226, 0.25);
+      p {
+        text-transform: uppercase;
+        font-weight: 900;
+        font-size: 1.15rem;
+        margin-left: 2em;
+      }
+    }
+    .homeAssistant {
+      background-color: #41bdf5;
+    }
+    .gpt {
+      background-color: #75ab9d;
+    }
+  }
 }

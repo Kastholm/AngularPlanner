@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 //An Observable is a way of handling asynchronous operations, like HTTP requests. It can emit multiple values over time.
 import { Observable } from 'rxjs';
 // global variables
-import { GlobalService } from './global.service';
+import { GlobalService } from '../../services/global.service';
 
 //Where
 @Injectable({
@@ -21,18 +21,17 @@ export class MonthapiService {
   constructor(private http: HttpClient, private globalService: GlobalService) {
     this.path = this.globalService.globalPath;
   }
-  //http get request - returns an Observable - emits the data
-  //Components can then subscribe to the Observable to get the data
+  //Fetches data from the API with HTTP
   fetchMonthData(): Observable<any> {
     return this.http.get(`${this.path}/monthdata`);
   }
-  //setters and getters - allows other components to store and retrieve the data
+  //Stores the fetched data in this service file 
   setMonthData(data: any) {
     this.monthdata = data;
     console.log('Month data set 1', this.monthdata);
     return this.monthdata;
   }
-  // Returns the month data
+  // Function to retrieve the data in a component
   getMonthData(): any {
     return this.monthdata;
   }

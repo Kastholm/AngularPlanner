@@ -12,17 +12,17 @@
 
           <!-- Next -->
 
-          <learned-form #LearnedForm></learned-form>
+          <learned-form
+            #LearnedForm
+            (learnedAdded)="routing.fetchDataAndSetMonthData()"
+          ></learned-form>
         </div>
         <div class="sectionMonth">
           <!-- <p>her</p> -->
           <!-- <pre>data {{ monthdata | json }}</pre> -->
           <!-- <pre>goals {{ month.goals | json }}</pre>
            <pre> måned {{ month.name | json }}</pre> -->
-          <div
-            *ngFor="let learned of month.learned"
-            class="contentBox"
-          >
+          <div *ngFor="let learned of month.learned" class="contentBox">
             <span class="flex justify-between items-center">
               <p class="text-white text-3xl font-bold">{{ learned.title }}</p>
               <div class="flex">

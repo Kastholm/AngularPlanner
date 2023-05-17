@@ -16,7 +16,7 @@
           Dette fortæller Angular at når returnDetailsToParent begivenheden udløses fra Child-komponenten, skal den kalde receiveDetailsFromChild() funktionen i Parent-komponenten og sende begivenhedsdataene ($event) som argument.
         -->
           <!-- #childSelector -->
-          <note-form #helloWorld></note-form>
+          <note-form #helloWorld (noteAdded)="routing.fetchDataAndSetMonthData()"></note-form>
         </div>
         <div class="sectionNotes">
           <!-- <p>her</p> -->

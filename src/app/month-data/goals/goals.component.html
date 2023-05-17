@@ -10,7 +10,7 @@
               Tilføj keypoint for {{ month.name }}
             </p>
           </h1>
-          <goal-form #goalForm></goal-form>
+          <goal-form #goalForm (goalAdded)="routing.fetchDataAndSetMonthData()"></goal-form>
         </div>
         <div class="sectionMonth">
           <div

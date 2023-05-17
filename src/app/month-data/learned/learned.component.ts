@@ -13,7 +13,7 @@ import { marked } from 'marked';
 })
 export class LearnedComponent implements OnInit {
   constructor(
-    private routing: RoutingService,
+    public routing: RoutingService,
     private monthApi: MonthapiService
   ) {}
 

@@ -15,7 +15,7 @@ import { marked } from 'marked';
 })
 export class NotesComponent implements OnInit {
   constructor(
-    private routing: RoutingService,
+    public routing: RoutingService,
     private monthApi: MonthapiService
   ) {
     //marked.use(mangle());
@@ -50,20 +50,4 @@ export class NotesComponent implements OnInit {
     note.expanded = !note.expanded;
   }
 
-  // Definer strukturen
-  /*  receivedDataFromChild(note: {
-    title: string;
-    category: string;
-    description: string;
-  }) {
-    console.log('receivedDataFromChild called' +  note.title + note.category + note.description);
-  } */
-  //Knappen
-  /*  releaseEmitDataEvent(title: string, category: string, description: string) {
-    this.receivedDataFromChild({
-      title,
-      category,
-      description,
-    });
-  } */
 }

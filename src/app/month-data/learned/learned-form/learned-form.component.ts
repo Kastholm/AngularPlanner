@@ -27,10 +27,12 @@ export class LearnedFormComponent implements OnInit {
   parseMarkdown(content: string): string {
     return marked(content);
   }
+
+  @Output() learnedAdded: EventEmitter<void> = new EventEmitter<void>();
   /* -------------------------- Implementing services ------------------------- */
   constructor(
     private monthApi: MonthapiService,
-    private routing: RoutingService
+    public routing: RoutingService
   ) {
     //dev purpose
     console.log('Du er på learned måned', routing.monthChosen);
@@ -147,6 +149,7 @@ export class LearnedFormComponent implements OnInit {
       this.monthApi.addLearned(this.monthName, learnedValues).subscribe(
         (res) => {
           console.log('New goal added:', res);
+          this.learnedAdded.emit();
         },
         (err) => {
           console.log('Error adding new month:', err);
@@ -285,23 +288,12 @@ export class LearnedFormComponent implements OnInit {
         .subscribe(
           (res) => {
             console.log('New goal added:', res);
+            this.learnedAdded.emit();
           },
           (err) => {
             console.log('Error adding new month:', err);
           }
         );
-      //dev purpose
-      console.log(
-        'Dether burde være month',
-        this.monthName,
-        'Det her burde være learned name',
-        name,
-        'dether burde være learned id',
-        learnedId,
-        'updateLearnedValues kommer her',
-        updateLearnedValues,
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero ab cupiditate possimus quod a, eum, aspernatur natus impedit, magni harum voluptatum ea quia deserunt. Vitae excepturi sequi eos odit, quae impedit cupiditate harum nemo nisi laboriosam ea natus sit iste fugiat amet beatae ducimus, accusantium architecto voluptas voluptatum odio dolorum saepe dicta quos! Ratione quasi optio totam in aspernatur explicabo eligendi nulla ipsam ea officia nesciunt facilis, soluta cumque dolore recusandae quas? Dolore porro laboriosam quos quo eius est assumenda quidem aliquam, facere fuga quas accusamus ipsam illo, at quod molestiae a recusandae placeat harum fugit reprehenderit ea, deleniti maiores.'
-      );
     }
   }
 }

@@ -26,6 +26,8 @@ export class NoteFormComponent implements OnInit {
   monthName: string = '';
   //Note content expanded default state
   isExpanded = false;
+
+  @Output() noteAdded: EventEmitter<void> = new EventEmitter<void>();
   //Importing the marked package (Markdown)
   parseMarkdown(content: string): string {
     return marked(content);
@@ -146,6 +148,7 @@ export class NoteFormComponent implements OnInit {
       this.monthApi.addNote(this.monthName, noteValues).subscribe(
         (res) => {
           console.log('New goal added:', res);
+          this.noteAdded.emit();
         },
         (err) => {
           console.log('Error adding new month:', err);
@@ -283,45 +286,12 @@ export class NoteFormComponent implements OnInit {
         .subscribe(
           (res) => {
             console.log('New goal added:', res);
+            this.noteAdded.emit();
           },
           (err) => {
             console.log('Error adding new month:', err);
           }
         );
-      //dev purpose
-      console.log(
-        'Dether burde være month',
-        this.monthName,
-        'Det her burde være note name',
-        name,
-        'dether burde være note id',
-        noteId,
-        'updateNoteValues kommer her',
-        updateNoteValues,
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero ab cupiditate possimus quod a, eum, aspernatur natus impedit, magni harum voluptatum ea quia deserunt. Vitae excepturi sequi eos odit, quae impedit cupiditate harum nemo nisi laboriosam ea natus sit iste fugiat amet beatae ducimus, accusantium architecto voluptas voluptatum odio dolorum saepe dicta quos! Ratione quasi optio totam in aspernatur explicabo eligendi nulla ipsam ea officia nesciunt facilis, soluta cumque dolore recusandae quas? Dolore porro laboriosam quos quo eius est assumenda quidem aliquam, facere fuga quas accusamus ipsam illo, at quod molestiae a recusandae placeat harum fugit reprehenderit ea, deleniti maiores.'
-      );
     }
   }
-
-  /* -------------------------------------------------------------------------- */
-  /*                                 Dummy data                                 */
-  /* -------------------------------------------------------------------------- */
-  // Laver selve skeletet af hvilken data der skal offentliggøres til parent
-  /* @Output() sendDataToParent = new EventEmitter<{
-    title: string;
-    category: string;
-    description: string;
-  }>(); */
-
-  sendEmitDataEvent(title: string, category: string, description: string) {
-    /* this.updateNote(title, category, description); */
-  }
-  // Definerer en funktion der kan udløse den emittede data fra child til parent
-  // Denne funktion skal bruges i parent komponenten for at modtage dataen fra den emittede data
-  // sendDataEvent() laves for at vi kan udløse den emittede data fra child til parent via et event som fx. click()
-  /* this.sendDataToParent.emit({
-    title,
-    category,
-    description,
-  }); */
 }

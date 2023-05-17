@@ -27,6 +27,8 @@ export class GoalFormComponent implements OnInit {
   parseMarkdown(content: string): string {
     return marked(content);
   }
+  //Output an event so goals.component.ts get's notified when a new goal is added/updated
+  @Output() goalAdded: EventEmitter<void> = new EventEmitter<void>();
   // Implementing services
   /* -------------------------- Implementing services ------------------------- */
   constructor(
@@ -170,6 +172,7 @@ export class GoalFormComponent implements OnInit {
       this.monthApi.addGoal(this.monthName, goalValues).subscribe(
         (res) => {
           console.log('New goal added:', res);
+          this.goalAdded.emit();
         },
         (err) => {
           console.log('Error adding new month:', err);
@@ -386,6 +389,7 @@ export class GoalFormComponent implements OnInit {
         .subscribe(
           (res) => {
             console.log('New goal added:', res);
+            this.goalAdded.emit();
           },
           (err) => {
             console.log('Error adding new month:', err);

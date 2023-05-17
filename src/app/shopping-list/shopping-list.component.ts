@@ -21,6 +21,7 @@ export class ShoppingListComponent {
   parseMarkdown(content: string): string {
     return marked(content);
   }
+
   ngOnInit() {
     this.shoppingAPI.fetchShoppingData().subscribe(
       (data) => {
@@ -30,7 +31,8 @@ export class ShoppingListComponent {
       (error) => {
         console.error('Error fetching shopping data:', error);
       }
-    );
+      );
+      /* this.shoppingData.push(res); */
   }
 
   deleteItem(itemId: string) {
@@ -44,8 +46,10 @@ export class ShoppingListComponent {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
+        this.shoppingData = this.shoppingData.filter((item) => item._id !== itemId);
         this.shoppingAPI.deleteItem(itemId).subscribe((res) => {
           console.log('Item deleted:', res);
+          
         });
         Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       }
@@ -132,6 +136,7 @@ export class ShoppingListComponent {
         .subscribe(
           (res) => {
             console.log('New item added:', res);
+            this.shoppingData.push(res);
           },
           (err) => {
             console.log('Error adding item:', err);

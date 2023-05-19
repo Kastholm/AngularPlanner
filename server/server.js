@@ -32,9 +32,11 @@ app.use(
 app.use(express.json());
 
 //getting the route file from the routes folder
+const authdata = require("./auth/authdata");
 const monthdata = require("./routes/monthdata");
 const shoppingdata = require("./routes/shoppingdata");
 //url call
+app.use("/authdata", authdata);
 app.use("/monthdata", monthdata);
 app.use("/shoppingdata", shoppingdata);
 

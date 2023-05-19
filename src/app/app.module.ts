@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardService } from './auth/services/auth-guard.service';
 //Components
 import { AppComponent } from './app.component';
 import { LeftPanelComponent } from './left-panel/left-panel.component';
@@ -15,11 +16,23 @@ import { NoteFormComponent } from './month-data/notes/note-form/note-form.compon
 import { LearnedFormComponent } from './month-data/learned/learned-form/learned-form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { AuthComponent } from './auth/auth.component';
+import { FormsModule } from '@angular/forms';
 //Routes from NgModules
+// Pages only accesisble when logged in, chosen by AuthGuardService
 const appRoutes: Routes = [
-  { path: 'month/:month', component: MonthDataComponent },
-  { path: '', component: DashboardComponent },
-  { path: 'shoppinglist', component: ShoppingListComponent },
+  {
+    path: 'month/:month',
+    component: MonthDataComponent,
+    canActivate: [AuthGuardService],
+  },
+  { path: '', component: DashboardComponent, canActivate: [AuthGuardService] },
+  {
+    path: 'shoppinglist',
+    component: ShoppingListComponent,
+    canActivate: [AuthGuardService],
+  },
+  { path: 'login', component: AuthComponent },
 ];
 
 @NgModule({
@@ -35,8 +48,14 @@ const appRoutes: Routes = [
     LearnedFormComponent,
     DashboardComponent,
     ShoppingListComponent,
+    AuthComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, RouterModule.forRoot(appRoutes)],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

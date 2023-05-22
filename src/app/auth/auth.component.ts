@@ -21,23 +21,47 @@ export class AuthComponent implements OnInit {
       this.authService.setUserData(data);
     });
   }
+
   onSubmit() {
+    console.log('Username received from loginform', this.email);
+    this.authService.login(this.email, this.password).subscribe(
+      (res) => {
+        // Handle successful login. You might want to store the session token here.
+        this.router.navigate(['/']);
+        console.log('Success! from auth.component.ts')
+      },
+      (err) => {
+        // Handle login error
+      }
+    );
+  }
+
+  /* onSubmit() {
     console.log('Submitting login form');
     console.log('Email:', this.email, 'password', this.password);
+
     const userValues = {
       email: this.email,
       password: this.password,
     };
+ */
 
-    this.authService.login(userValues).subscribe(
-      () => {
-        console.log('Success! from auth.component.ts');
-        this.router.navigate(['/']); // Navigate to home route
-      },
-      (error) => {
-        // The server responded with an error, probably invalid credentials.
-        console.log('Invalid email or password! from auth.component.ts' + error);
-      }
-    );
-  }
+  /* 
+    console.log('Authenticating this user', userValues);
+
+    this.authService
+      .authenticateUser(userValues.email, userValues.password)
+      .subscribe(
+        () => {
+          console.log('Success! from auth.component.ts');
+
+          if (this.authService.checkAuthenticated()) {
+            console.log('User authenticated by auth-service');
+            this.router.navigate(['/']); // Navigate to home route
+          } else {
+            console.log('Invalid email or password!');
+          }
+        }
+      ); */
+  /* } */
 }

@@ -10,6 +10,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 // Loading bcrypt to hash passwords
 const bcrypt = require("bcrypt");
+// Loading jsonwebtoken to create tokens
+const jwt = require("jsonwebtoken");
 // Loading router to define and handle routes
 const router = express.Router();
 
@@ -53,6 +55,14 @@ router.post("/login", async (req, res) => {
         userData.password
       );
       if (passwordMatches) {
+        // Create a token
+        const token = jwt.sign(
+          { id: userData._id }, // payload
+          "yourSecretKey", // secret key
+          { expiresIn: "1h" } // options
+        );
+        res.json({ token });
+        console.log(passwordMatches, userData.password, token);
         console.log("Password matches from the server");
         return;
       }

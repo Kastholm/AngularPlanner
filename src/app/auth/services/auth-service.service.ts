@@ -34,19 +34,42 @@ export class AuthServiceService {
     return this.userdata;
   }
 
-  authenticateUser(username: string, password: string) {
-    const user = this.userdata.find(
-      (user: any) => user.username === username && user.password === password
+  authenticateUser(email: string, password: string) {
+    this.login({ email, password }).subscribe(
+      (response) => {
+        if (response) {
+          console.log('User authenticated by auth-service:', response);
+          this.isAuthenticated = true;
+        } else {
+          this.isAuthenticated = false;
+        }
+      },
+      (error) => {
+        console.error('Error authenticating user by auth-service:', error);
+        this.isAuthenticated = false;
+      }
     );
-
-    if (user) {
-      this.isAuthenticated = true;
-    } else {
-      this.isAuthenticated = false;
-    }
   }
 
   getUserData(): any {
     return this.userdata;
+  }
+
+  login(userData: any): Observable<any> {
+    console.log('Logging in route...');
+    const body = {
+      email: userData.email,
+      password: userData.password,
+    };
+    console.log('Logging in route... Sending http request');
+    return this.http.post(`${this.path}/authdata/login`, body);
+  }
+
+  addUser(userData: any): Observable<any> {
+    const body = {
+      email: userData.email,
+      password: userData.password,
+    };
+    return this.http.post(`${this.path}/authdata/createUser`, body);
   }
 }

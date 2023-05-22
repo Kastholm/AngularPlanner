@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from './services/auth-service.service';
+import { AuthGuardService } from './services/auth-guard.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-auth',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
-  username: string = '';
+  email: string = '';
   password: string = '';
 
   constructor(
@@ -21,18 +22,22 @@ export class AuthComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.authService.fetchUserData().subscribe((data) => {
-      this.authService.setUserData(data);
-      this.authService.authenticateUser(this.username, this.password);
+    console.log('Submitting login form');
+    console.log('Email:', this.email, 'password', this.password);
+    const userValues = {
+      email: this.email,
+      password: this.password,
+    };
 
-      if (this.authService.checkAuthenticated()) {
-        // A match is found
-        console.log('Success!');
+    this.authService.login(userValues).subscribe(
+      () => {
+        console.log('Success! from auth.component.ts');
         this.router.navigate(['/']); // Navigate to home route
-      } else {
-        // No matching user is found
-        console.log('Invalid username or password!');
+      },
+      (error) => {
+        // The server responded with an error, probably invalid credentials.
+        console.log('Invalid email or password! from auth.component.ts' + error);
       }
-    });
+    );
   }
 }

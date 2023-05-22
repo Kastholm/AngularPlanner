@@ -1,0 +1,61 @@
+<section>
+     <div *ngFor="let month of monthdata">
+       <div *ngIf="month.name === monthChosen" class="px-24 py-10">
+         <div class="monthSection">
+           <h1 class="text-6xl bold mb-8">{{ month.name }}</h1>
+           <div class="text-white grid grid-cols-2 mb-8">
+             <h1 class="font-bold text-2xl">
+               Tilføj goal til {{ month.name }}
+               <p class="font-semibold text-base">
+                 Tilføj keypoint for {{ month.name }}
+               </p>
+             </h1>
+             <goal-form #goalForm (goalAdded)="routing.fetchDataAndSetMonthData()"></goal-form>
+           </div>
+           <div class="sectionMonth">
+             <div
+               *ngFor="let goal of month.goals"
+               [ngClass]="{ goalCompleted: goal.completed }"
+               class="contentBox"
+             >
+               <span id="goal" class="flex justify-between items-center">
+                 <p class="goalName text-white text-3xl font-bold">
+                   {{ goal.title }}
+                 </p>
+                 <div class="flex">
+                   <button
+                     (click)="
+                       goalForm.updateGoal(
+                         goal.title,
+                         goal.category,
+                         goal.description,
+                         goal.importance,
+                         goal.completed,
+                         goal._id
+                       )
+                     "
+                     class="hover:border-white text-white bg-[#21262d] p-2 border border-gray-600 rounded-lg"
+                   >
+                     ✅ Opdater
+                   </button>
+                 </div>
+               </span>
+               <p
+                 [innerHTML]="parseMarkdown(goal.description)"
+                 class="markdown-body text-lg text-gray-400 mt-4"
+               >
+                 {{ goal.description }}
+               </p>
+               <span class="mt-3 flex items-center gap-5">
+                 <p class="text-sm text-gray-400">🔴 {{ goal.category }}</p>
+                 <a href="#" class="text-sm text-gray-400"
+                   >⭐ {{ goal.importance }}</a
+                 >
+               </span>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </section>
+   

@@ -11,13 +11,18 @@ export class SignUpComponent {
   password: string = '';
   confirmPassword: string = '';
 
-  constructor(private authService: AuthServiceService, private router: Router) {}
+  constructor(
+    private authService: AuthServiceService,
+    private router: Router
+  ) {}
 
   addUser() {
+    // Check if passwords match
     if (this.password !== this.confirmPassword) {
       console.log('Passwords do not match');
       return;
     }
+    // Create user object
     const userValues = {
       email: this.email,
       password: this.password,
@@ -27,7 +32,7 @@ export class SignUpComponent {
     this.authService.addUser(userValues).subscribe(
       (res) => {
         console.log('New user added:', res);
-        this.router.navigate(['/login']); // Navigate to home route
+        this.router.navigate(['/']); // Navigate to home route
       },
       (err) => {
         console.log('Error adding new user:', err);

@@ -22,24 +22,6 @@ export class AuthServiceService {
     this.path = this.globalService.globalPath;
   }
 
-  /* heckAuthenticated(): boolean {
-    return this.isAuthenticated;
-  } */
-
-  fetchUserData(): Observable<any> {
-    return this.http.get(`${this.path}/authdata`);
-  }
-
-  setUserData(data: any) {
-    this.userdata = data;
-    console.log('Users data set 1', this.userdata);
-    return this.userdata;
-  }
-
-  getUserData(): any {
-    return this.userdata;
-  }
-
   login(email: string, password: string): Observable<any> {
     return this.http
       .post<any>(`${this.path}/authdata/login`, { email, password })
@@ -50,24 +32,10 @@ export class AuthServiceService {
         })
       );
   }
-
   checkAuthenticated(): boolean {
     const token = localStorage.getItem('authToken');
     // Checks if token is null or undefined
     return !!token;
-    /* return this.isAuthenticated; */
-  }
-
-  authenticateUser(email: string, password: string) {
-    const user = this.userdata.find(
-      (user: any) => user.email === email && user.password === password
-    );
-
-    if (user) {
-      this.isAuthenticated = true;
-    } else {
-      this.isAuthenticated = false;
-    }
   }
 
   addUser(userData: any): Observable<any> {

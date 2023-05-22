@@ -59,10 +59,17 @@ router.post("/login", async (req, res) => {
         const token = jwt.sign(
           { id: userData._id }, // payload
           "yourSecretKey", // secret key
-          { expiresIn: "1h" } // options
+          { expiresIn: "5h" } // options
         );
         res.json({ token });
-        console.log(passwordMatches, userData.password, token);
+        console.log(
+          "Does crypted pass and userpassword match?",
+          passwordMatches,
+          "The crypted password",
+          userData.password,
+          "the generated json webtoken",
+          token
+        );
         console.log("Password matches from the server");
         return;
       }

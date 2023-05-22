@@ -19,6 +19,8 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule } from '@angular/forms';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { ToDoComponent } from './month-data/to-do/to-do.component';
+import { ToDoFormComponent } from './month-data/to-do/to-do-form/to-do-form.component';
 //Routes from NgModules
 // Pages only accesisble when logged in, chosen by AuthGuardService
 const appRoutes: Routes = [
@@ -34,7 +36,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuardService],
   },
   { path: 'login', component: AuthComponent },
-  { path: 'signup', component: SignUpComponent },
+  { path: 'signup', component: SignUpComponent, canActivate: [AuthGuardService], },
 ];
 
 @NgModule({
@@ -52,6 +54,8 @@ const appRoutes: Routes = [
     ShoppingListComponent,
     AuthComponent,
     SignUpComponent,
+    ToDoComponent,
+    ToDoFormComponent,
   ],
   imports: [
     BrowserModule,

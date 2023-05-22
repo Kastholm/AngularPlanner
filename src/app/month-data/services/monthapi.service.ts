@@ -25,7 +25,7 @@ export class MonthapiService {
   fetchMonthData(): Observable<any> {
     return this.http.get(`${this.path}/monthdata`);
   }
-  //Stores the fetched data in this service file 
+  //Stores the fetched data in this service file
   setMonthData(data: any) {
     this.monthdata = data;
     console.log('Month data set 1', this.monthdata);
@@ -175,6 +175,17 @@ export class MonthapiService {
     );
   }
   /* -------------------------------------------------------------------------- */
-  /*                                 **** ROUTES                                */
+  /*                                WEEK ROUTES                                 */
   /* -------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------- */
+  /*                                Add a new Week                              */
+  /*                        Used by: to-do & to-do-form                     */
+  /* -------------------------------------------------------------------------- */
+  addWeek(monthName: string, weekData: any): Observable<any> {
+    const body = {
+      monthName: monthName,
+      weekData: weekData,
+    };
+    return this.http.post(`${this.path}/monthdata/addWeek/${monthName}`, body);
+  }
 }

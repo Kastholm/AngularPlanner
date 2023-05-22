@@ -3,6 +3,7 @@
     <div *ngIf="month.name === monthChosen" class="px-24 py-10">
       <div class="monthSection">
         <h1 class="text-6xl bold mb-8">{{ month.name }}</h1>
+        <to-do></to-do>
         <div class="text-white grid grid-cols-2 mb-8">
           <h1 class="font-bold text-2xl">
             Tilføj goal til {{ month.name }}
@@ -10,8 +11,12 @@
               Tilføj keypoint for {{ month.name }}
             </p>
           </h1>
-          <goal-form #goalForm (goalAdded)="routing.fetchDataAndSetMonthData()"></goal-form>
+          <goal-form
+          #goalForm
+          (goalAdded)="routing.fetchDataAndSetMonthData()"
+          ></goal-form>
         </div>
+        
         <div class="sectionMonth">
           <div
             *ngFor="let goal of month.goals"
@@ -54,6 +59,7 @@
             </span>
           </div>
         </div>
+        
       </div>
     </div>
   </div>

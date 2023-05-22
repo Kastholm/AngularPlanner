@@ -15,6 +15,107 @@ const router = express.Router();
 /*                                SCHEMAS                                     */
 /* -------------------------------------------------------------------------- */
 
+const taskSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  Monday: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  Tuesday: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  Wednesday: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  Thursday: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  Friday: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  Saturday: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  Sunday: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+});
+const weekSchema = new Schema({
+  title: String,
+  Monday: [taskSchema],
+  Tuesday: [taskSchema],
+  Wednesday: [taskSchema],
+  Thursday: [taskSchema],
+  Friday: [taskSchema],
+  Saturday: [taskSchema],
+  Sunday: [taskSchema],
+});
+
 const childSchema = new Schema({
   title: String,
   category: String,
@@ -33,8 +134,11 @@ const goalSchema = new Schema({
 const monthSchema = new Schema({
   name: String,
   goals: [goalSchema],
+  weeks: {
+    type: [weekSchema],
+    default: [{}, {}, {}, {}, {}], // Create four empty weeks by default
+  },
   learned: [childSchema],
-  made: [childSchema],
   notes: [childSchema],
 });
 
@@ -270,6 +374,26 @@ router.patch("/updateLearned/:monthName/:learnedId", async (req, res) => {
     res.status(500).json({ message: "An error occurred" });
   }
 });
+
+/* -------------------------------------------------------------------------- */
+/*                                 WEEK ROUTES                                */
+/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                 Router.post                                */
+/*                  Purpose: Add a new Week to a specific month               */
+/* -------------------------------------------------------------------------- */
+/* router.post("/addWeek/:name", async (req, res) => {
+  try {
+    const { monthName, weekData } = req.body;
+    const month = await Month.findOne({ name: monthName });
+    const newWeek = new Week(weekData);
+    month.learned.push(newWeek);
+    await month.save();
+    res.json(month);
+  } catch (err) {
+    res.json("err");
+  }
+}); */
 
 /* -------------------------------------------------------------------------- */
 /*                              Export the router                             */

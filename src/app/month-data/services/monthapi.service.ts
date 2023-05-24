@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 //http request
 import { HttpClient } from '@angular/common/http';
 //An Observable is a way of handling asynchronous operations, like HTTP requests. It can emit multiple values over time.
-import { Observable } from 'rxjs';
+import { Observable, tap, catchError } from 'rxjs';
 // global variables
 import { GlobalService } from '../../services/global.service';
 
@@ -178,14 +178,55 @@ export class MonthapiService {
   /*                                WEEK ROUTES                                 */
   /* -------------------------------------------------------------------------- */
   /* -------------------------------------------------------------------------- */
-  /*                                Add a new Week                              */
-  /*                        Used by: to-do & to-do-form                     */
+  /*                                Add a new ToDO                              */
+  /*                        Used by: to-do & to-do-form                         */
   /* -------------------------------------------------------------------------- */
-  addWeek(monthName: string, weekData: any): Observable<any> {
+  sendTodo(monthName: string, dayName: string, todoData: any): Observable<any> {
     const body = {
-      monthName: monthName,
-      weekData: weekData,
+      todoData: {
+        title: todoData.title,
+        description: todoData.description,
+      },
     };
-    return this.http.post(`${this.path}/monthdata/addWeek/${monthName}`, body);
+    console.log('Request Body:', body); // Log the request body
+
+    return this.http
+      .post(`${this.path}/monthdata/addToDo/${monthName}/${dayName}`, body)
+      .pipe(
+        tap((response) => {
+          console.log('api Response:', dayName, response); // Log the response
+        }),
+        catchError((error) => {
+          console.log('api Error:', error); // Log any errors
+          throw error; // Rethrow the error to be handled by the caller
+        })
+      );
+  }
+  updateTodo(
+    monthName: string,
+    dayName: string,
+    todoId: string,
+    completed: boolean
+  ): Observable<any> {
+    const body = {
+      completed: completed,
+    };
+
+    console.log('Update Todo Request Body:', body);
+
+    return this.http
+      .patch(
+        `${this.path}/monthdata/updateTodo/${monthName}/${dayName}/${todoId}`,
+        body
+      )
+      .pipe(
+        tap((response) => {
+          console.log('api Response:', response);
+        }),
+        catchError((error) => {
+          console.log('api Error:', error);
+          throw error;
+        })
+      );
   }
 }

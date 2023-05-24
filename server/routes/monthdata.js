@@ -15,105 +15,49 @@ const router = express.Router();
 /*                                SCHEMAS                                     */
 /* -------------------------------------------------------------------------- */
 
+// Define a common schema for tasks
 const taskSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
-  Monday: [
-    {
-      title: {
-        type: String,
-        required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  Tuesday: [
-    {
-      title: {
-        type: String,
-        required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  Wednesday: [
-    {
-      title: {
-        type: String,
-        required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  Thursday: [
-    {
-      title: {
-        type: String,
-        required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  Friday: [
-    {
-      title: {
-        type: String,
-        required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  Saturday: [
-    {
-      title: {
-        type: String,
-        required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  Sunday: [
-    {
-      title: {
-        type: String,
-        required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+  description: {
+    type: String,
+    required: true,
+  },
+  completed: { type: Boolean, default: false },
 });
+
 const weekSchema = new Schema({
-  title: String,
-  Monday: [taskSchema],
-  Tuesday: [taskSchema],
-  Wednesday: [taskSchema],
-  Thursday: [taskSchema],
-  Friday: [taskSchema],
-  Saturday: [taskSchema],
-  Sunday: [taskSchema],
+  _id: false,
+  Monday: {
+    type: [taskSchema],
+    default: [],
+  },
+  Tuesday: {
+    type: [taskSchema],
+    default: [],
+  },
+  Wednesday: {
+    type: [taskSchema],
+    default: [],
+  },
+  Thursday: {
+    type: [taskSchema],
+    default: [],
+  },
+  Friday: {
+    type: [taskSchema],
+    default: [],
+  },
+  Saturday: {
+    type: [taskSchema],
+    default: [],
+  },
+  Sunday: {
+    type: [taskSchema],
+    default: [],
+  },
 });
 
 const childSchema = new Schema({
@@ -136,7 +80,7 @@ const monthSchema = new Schema({
   goals: [goalSchema],
   weeks: {
     type: [weekSchema],
-    default: [{}, {}, {}, {}, {}], // Create four empty weeks by default
+    default: [{}], // Create four empty weeks by default
   },
   learned: [childSchema],
   notes: [childSchema],
@@ -380,21 +324,69 @@ router.patch("/updateLearned/:monthName/:learnedId", async (req, res) => {
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
 /*                                 Router.post                                */
-/*                  Purpose: Add a new Week to a specific month               */
+/*              Purpose: Add a new todo to a specific day in a month          */
 /* -------------------------------------------------------------------------- */
-/* router.post("/addWeek/:name", async (req, res) => {
+router.post("/addTodo/:monthName/:dayName", async (req, res) => {
   try {
-    const { monthName, weekData } = req.body;
-    const month = await Month.findOne({ name: monthName });
-    const newWeek = new Week(weekData);
-    month.learned.push(newWeek);
-    await month.save();
-    res.json(month);
-  } catch (err) {
-    res.json("err");
-  }
-}); */
+    const { monthName, dayName } = req.params;
+    console.log("ServerMonth:", monthName);
+    console.log("Server Day:", dayName);
+    const { title, description } = req.body.todoData; // Destructure the todoData object
 
+    console.log("Server Todo Data:", req.body.todoData);
+    // Find the month based on the monthName
+    const month = await Month.findOne({ name: monthName });
+    console.log("Month:", month);
+    console.log("Day Name:", dayName);
+
+    // Additional logging
+    console.log("Complete Month Object:", month);
+    console.log("Week 0:", month.weeks[0]);
+
+    // Find the day based on the dayName
+    const day = month.weeks[0][dayName];
+    console.log("Found Day:", dayName, day);
+
+    if (day) {
+      const newTodo = {
+        title: title,
+        description: description,
+        completed: false,
+      };
+
+      day.push(newTodo);
+      await month.save();
+
+      res.json("Todo added successfully");
+    } else {
+      res.json("Day not found");
+    }
+  } catch (err) {
+    // Improved error logging
+    console.error("Server error: ", err);
+    res.json(`Server error: ${err.message}`);
+  }
+});
+/* -------------------------------------------------------------------------- */
+/*                                 Router.post                                */
+/*                 Purpose: Update a todo to be completed or not              */
+/* -------------------------------------------------------------------------- */
+router.patch("/updateTodo/:monthName/:dayName/:todoId", async (req, res) => {
+  const { monthName, dayName, todoId } = req.params;
+  const { completed } = req.body; // Whether the todo is completed
+
+  const month = await Month.findOne({ name: monthName });
+  const day = month.weeks[0][dayName];
+
+  const todo = day.find((todo) => todo._id.toString() === todoId);
+  if (todo) {
+    todo.completed = completed;
+    await month.save();
+    res.json("Todo updated successfully");
+  } else {
+    res.json("Todo not found");
+  }
+});
 /* -------------------------------------------------------------------------- */
 /*                              Export the router                             */
 /* -------------------------------------------------------------------------- */

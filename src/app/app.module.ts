@@ -17,10 +17,11 @@ import { LearnedFormComponent } from './month-data/learned/learned-form/learned-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { AuthComponent } from './auth/auth.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ToDoComponent } from './month-data/to-do/to-do.component';
 import { ToDoFormComponent } from './month-data/to-do/to-do-form/to-do-form.component';
+import { MonthSearchComponent } from './month-data/month-search/month-search.component';
 //Routes from NgModules
 // Pages only accesisble when logged in, chosen by AuthGuardService
 const appRoutes: Routes = [
@@ -36,7 +37,16 @@ const appRoutes: Routes = [
     canActivate: [AuthGuardService],
   },
   { path: 'login', component: AuthComponent },
-  { path: 'signup', component: SignUpComponent, canActivate: [AuthGuardService], },
+  {
+    path: 'signup',
+    component: SignUpComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'search',
+    component: MonthSearchComponent,
+    canActivate: [AuthGuardService],
+  },
 ];
 
 @NgModule({
@@ -56,11 +66,13 @@ const appRoutes: Routes = [
     SignUpComponent,
     ToDoComponent,
     ToDoFormComponent,
+    MonthSearchComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [],

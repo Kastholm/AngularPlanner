@@ -1,0 +1,145 @@
+<div class="min-h-screen">
+     <div class=" flex justify-center">
+       <div class="container mx-auto rounded-lg p-24">
+         <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+           <h1 class="text-center font-bold text-white text-4xl">
+             Find data
+           </h1>
+           <p class="mx-auto font-normal text-sm my-6 max-w-lg">
+             Lorem ipsum dolor sit amet consectetur adipisicing elit. Et odit nobis iusto, aspernatur accusantium voluptas ipsum rem necessitatibus sequi modi incidunt veniam impedit.
+           </p>
+           <div
+             class="sm:flex items-center bg-white rounded-lg overflow-hidden px-8 py-4 justify-between"
+           >
+             <input
+               class="text-xl text-gray-400 flex-grow outline-none px-2"
+               formControlName="searchText"
+               type="text"
+               placeholder="Search"
+             />
+             <div class="ms:flex items-center px-2 rounded-lg space-x-4 mx-auto">
+               <button
+                 class="bg-indigo-900 text-white text-base rounded-lg px-32 py-5 font-thin" type="submit"
+               >
+                 Search
+               </button>
+             </div>
+           </div>
+         </form>
+       </div>
+     </div>
+     
+     <section>
+          <div >
+               <div class="px-24 py-5">
+                    <div class="monthSection p-2">
+                         <h1 class="text-center text-3xl uppercase  font-bold">Goals</h1>
+                         <div class="sectionMonth">
+               <div
+                 *ngFor="let goal of searchResultsGoals"
+                 [ngClass]="{ goalCompleted: goal.completed }"
+                 class="contentBox"
+               >
+                 <span id="goal" class="flex justify-between items-center">
+                   <p class="goalName text-white text-3xl font-bold">
+                     {{ goal.title }}
+                   </p>
+                   <div class="flex"></div>
+                 </span>
+                 <p
+                   [innerHTML]="parseMarkdown(goal.description)"
+                   class="markdown-body text-lg text-gray-400 mt-4"
+                 >
+                   {{ goal.description }}
+                 </p>
+                 <span class="mt-3 flex items-center gap-5">
+                   <p class="text-sm text-gray-400">🔴 {{ goal.category }}</p>
+                   <a href="#" class="text-sm text-gray-400"
+                     >⭐ {{ goal.importance }}</a
+                   >
+                 </span>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </section>
+     <section class="my-3">
+          <div>
+            <div class="px-24 py-5">
+              <div class="monthSection">
+               <h1 class="text-center text-3xl uppercase  font-bold">Learned</h1>
+                <div class="sectionLearned">
+                  <div *ngFor="let learned of searchResultsLearned" class="contentBox">
+                    <span class="flex justify-between items-center">
+                      <p class="text-white text-3xl font-bold">{{ learned.title }}</p>
+                      <div class="flex">
+                        <button
+                          class="hover:border-white text-white bg-[#21262d] p-2 border border-gray-600 rounded-lg"
+                        >
+                          ✅ Opdater
+                        </button>
+                      </div>
+                    </span>
+                    <span>
+                      <p
+                        [innerHTML]="parseMarkdown(learned.description)"
+                        class="markdown-body text-lg text-gray-400 mt-4"
+                      >
+                        {{ learned.description }}
+                      </p>
+                    </span>
+                    <span class="mt-3 flex items-center gap-5">
+                      <p class="text-sm text-gray-400">🔴 {{ learned.category }}</p>
+                      <!--  <a href="#" class="text-sm text-gray-400">⭐ 2</a>
+                         <p class="text-sm text-gray-400">Dato oprettet</p> -->
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+     <section>
+          <div>
+            <div class="px-24 py-5">
+              <div class="monthSection">
+               <h1 class="text-center text-3xl uppercase  font-bold">Notes</h1>
+                <div class="sectionNotes">
+                  <div
+                    *ngFor="let note of searchResultsNotes"
+                    class="contentBox"
+                  >
+                    <span class="flex justify-between items-center">
+                      <p class="text-white text-3xl font-bold">{{ note.title }}</p>
+                      <div class="flex">
+                      </div>
+                    </span>
+                    <span>
+                      <button class="bg-red-400 p-2 mt-2" (click)="toggleExpand(note)">
+                        Expand
+                      </button>
+                      <p
+                        [innerHTML]="parseMarkdown(note.description)"
+                        [class.expanded]="note.expanded"
+                        [ngClass]="{
+                          'h-32': !note.expanded,
+                          'overflow-hidden': !note.expanded
+                        }"
+                        class="markdown-body text-lg text-gray-400 mt-4 h-32 overflow-hidden"
+                      >
+                        {{ note.description }}
+                      </p>
+                    </span>
+                    <span class="mt-3 flex items-center gap-5">
+                      <p class="text-sm text-gray-400">🔴 {{ note.category }}</p>
+                      <!--  <a href="#" class="text-sm text-gray-400">⭐ 2</a>
+                      <p class="text-sm text-gray-400">Dato oprettet</p> -->
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+</div>

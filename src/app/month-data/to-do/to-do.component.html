@@ -1,101 +1,109 @@
-<div  class="container mx-auto my-10 text-black">
-  <div class="wrapper bg-white rounded shadow w-full ">
+<div class="container mx-auto my-10 text-black">
+  <div class="wrapper bg-white rounded shadow w-full">
     <div class="header flex justify-between border-b p-2">
       <span class="text-lg font-bold">
         {{ monthName }}
       </span>
     </div>
-    <div >
+    <div *ngIf="monthName === 'hello'">
       <div>
         <table class="w-full">
           <thead>
             <tr>
-              <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
-                <span class="xl:block lg:block md:block sm:block hidden">Monday</span>
-                <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Mon</span>
+              <th
+                class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs"
+              >
+                <span class="xl:block lg:block md:block sm:block hidden"
+                  >Monday</span
+                >
+                <span class="xl:hidden lg:hidden md:hidden sm:hidden block"
+                  >Mon</span
+                >
               </th>
-              <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
-                <span class="xl:block lg:block md:block sm:block hidden">Tuesday</span>
-                <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Tue</span>
+              <th
+                class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs"
+              >
+                <span class="xl:block lg:block md:block sm:block hidden"
+                  >Tuesday</span
+                >
+                <span class="xl:hidden lg:hidden md:hidden sm:hidden block"
+                  >Tue</span
+                >
               </th>
-              <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
-                <span class="xl:block lg:block md:block sm:block hidden">Wednesday</span>
-                <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Wed</span>
+              <th
+                class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs"
+              >
+                <span class="xl:block lg:block md:block sm:block hidden"
+                  >Wednesday</span
+                >
+                <span class="xl:hidden lg:hidden md:hidden sm:hidden block"
+                  >Wed</span
+                >
               </th>
-              <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
-                <span class="xl:block lg:block md:block sm:block hidden">Thursday</span>
-                <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Thu</span>
+              <th
+                class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs"
+              >
+                <span class="xl:block lg:block md:block sm:block hidden"
+                  >Thursday</span
+                >
+                <span class="xl:hidden lg:hidden md:hidden sm:hidden block"
+                  >Thu</span
+                >
               </th>
-              <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
-                <span class="xl:block lg:block md:block sm:block hidden">Friday</span>
-                <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Fri</span>
+              <th
+                class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs"
+              >
+                <span class="xl:block lg:block md:block sm:block hidden"
+                  >Friday</span
+                >
+                <span class="xl:hidden lg:hidden md:hidden sm:hidden block"
+                  >Fri</span
+                >
               </th>
-              <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
-                <span class="xl:block lg:block md:block sm:block hidden">Saturday</span>
-                <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Sat</span>
+              <th
+                class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs"
+              >
+                <span class="xl:block lg:block md:block sm:block hidden"
+                  >Saturday</span
+                >
+                <span class="xl:hidden lg:hidden md:hidden sm:hidden block"
+                  >Sat</span
+                >
               </th>
-              <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
-                <span class="xl:block lg:block md:block sm:block hidden">Sunday</span>
-                <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Sun</span>
+              <th
+                class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs"
+              >
+                <span class="xl:block lg:block md:block sm:block hidden"
+                  >Sunday</span
+                >
+                <span class="xl:hidden lg:hidden md:hidden sm:hidden block"
+                  >Sun</span
+                >
               </th>
             </tr>
           </thead>
-          <tbody  *ngFor="let month of monthdata">
-            <tr     *ngFor="let week of month.weeks"  class="text-center h-20">
-              <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300 ">
-                <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
-                  <div class="top h-5 w-full">
-                    
+          <tbody>
+            <tr class="text-center h-20">
+              <div class="monday grid">
+                <td
+                  class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 transition cursor-pointer duration-500 ease hover:bg-gray-300"
+                >
+                  <div
+                    class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden"
+                  >
+                    <div class="top h-5 w-full">Mandag content</div>
                   </div>
-                 
-                </div>
-              </td>
-              <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
-                <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
-                  <div class="top h-5 w-full">
-                    
+                </td>
+                <td
+                  class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 transition cursor-pointer duration-500 ease hover:bg-gray-300"
+                >
+                  <div
+                    class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden"
+                  >
+                    <div class="top h-5 w-full">Mandag content</div>
                   </div>
-                  <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
-                </div>
-              </td>
-              <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
-                <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
-                  <div class="top h-5 w-full">
-                    
-                  </div>
-                  <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
-                </div>
-              </td>
-              <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
-                <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
-                  <div class="top h-5 w-full">
-                    
-                  </div>
-                  <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
-                </div>
-              </td>
-              <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
-                <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
-                  <div class="top h-5 w-full">
-                   
-                  </div>
-                  <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
-                </div>
-              </td>
-              <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-hidden transition cursor-pointer duration-500 ease hover:bg-gray-300">
-                <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
-                  <div class="top h-5 w-full">
-                  </div>
-                </div>
-              </td>
-              <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
-                <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
-                  <div class="top h-5 w-full">
-                  
-                  </div>
-                  <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
-                </div>
-              </td>
+                </td>
+              </div>
             </tr>
           </tbody>
         </table>
@@ -104,10 +112,7 @@
   </div>
 </div>
 
-
-
-
- <!-- <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer">
+<!-- <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer">
                   <div
                     class="event bg-blue-400 text-white rounded p-1 text-sm mb-1"
                   >
@@ -121,11 +126,9 @@
                   </div>
                 </div> -->
 
+<!--  -->
 
-
- <!--  -->
-
-               <!-- <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer">
+<!-- <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer">
                 <div
                   class="event bg-purple-400 text-white rounded p-1 text-sm mb-1"
                 >

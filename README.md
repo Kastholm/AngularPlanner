@@ -197,7 +197,7 @@ I koden er der oprettet en `MonthapiService`, der bruges til at håndtere kommun
 
 Forsiden er ment til at vise et homeassistant system.
 Ikke gjort public endnu grundet sikkerhed.
-![HomeAssistant](img/HA.jpg)
+![HomeAssistant](img/HA.JPG)
 
 ### `Søg data`
 

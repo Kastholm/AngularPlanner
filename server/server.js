@@ -45,15 +45,19 @@ app.use("/shoppingdata", shoppingdata);
 /* -------------------------------------------------------------------------- */
 async function mongoConnection() {
   const connectionString = `${process.env.MONGODB_URL}/monthplanner`;
-  const mongoConnection = await mongoose.connect(connectionString, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  return mongoConnection;
+  try {
+    const mongoConnection = await mongoose.connect(connectionString, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB connected successfully!");
+  } catch (error) {
+    console.error("MongoDB connection error: ", error);
+  }
 }
 
-// Store the connection objects
-const mongoDbConnection = mongoConnection();
+// Call the function to establish the connection
+mongoConnection();
 
 /* -------------------------------------------------------------------------- */
 /*                    Setting port for the server to run on                   */

@@ -5,7 +5,7 @@
 ### Problemformulering: Lave en personlig customized HUB, med daglig anvendte værktøjer. Der kan anvendes som en daglig strukturbog for Web arbejde og IT.
 <br>
 ![stack](img/stackk.png)
-
+![stack](img/routes.png)
 ## Backend
 
 ### Server.js

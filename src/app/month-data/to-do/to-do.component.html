@@ -48,9 +48,9 @@
                       (click)="
                         toggleTodoCompletion(month.name, weekday.key, tIndex)
                       "
-                      class="flex hover:bg-gray-300 flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden"
+                      class="flex hover:bg-gray-300 h-fit my-2 flex-col mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden"
                     >
-                      <div class="top h-5 w-full">
+                      <div class="top h-5 text-lg mb-2 w-full">
                         {{ todo.title }}
                       </div>
                       <p>{{ todo.description }}</p>

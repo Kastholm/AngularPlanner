@@ -3,9 +3,7 @@
 #### MEAN app hosted i Docker Containers . <br> Kalender og todo system og en generel hub - <br> til individuel anvendelse med genveje til ofte anvendt materiale under web arbejde.
 
 ### Problemformulering: Lave en personlig customized HUB, med daglig anvendte værktøjer. Der kan anvendes som en daglig strukturbog for Web arbejde og IT.
-<br>
 ![stack](img/stackk.png)
-![stack](img/routes.png)
 ## Backend
 
 ### Server.js

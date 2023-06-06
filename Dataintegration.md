@@ -12,12 +12,19 @@ under idviklingen.
 Fragmenter af kode til illustration af dine overvejelser skal være en del af præsentationen.
 Du bør bruge eksempler fra egne projekter og opgaver som eksempler i din gennemgang.
 
+#### Bindeled mellem Front og Backend ved User events.
+
+!['API'](https://s3.ap-south-1.amazonaws.com/myinterviewtrainer-domestic/public_assets/assets/000/000/533/original/Web_Service.png?1624433262)
+
 #### API'er og hvordan de fungerer
 
-En API, eller Application Programming Interface, er en kontrakt mellem softwarekomponenter, der definerer, hvordan de interagerer. Den består af et sæt regler, protokoller, og værktøjer, herunder metoder, datastrukturer, og endpoints, der bruges til at anmode om og udveksle data. API'er fungerer som broer, der tillader forskellige softwareapplikationer at kommunikere og interagere med hinanden på en sikker og struktureret måde.
+En `API, eller Application Programming Interface,` er en kontrakt mellem softwarekomponenter, der definerer, hvordan de interagerer. Den `består af et sæt regler, protokoller, og værktøjer, herunder metoder, datastrukturer, og endpoints, der bruges til at anmode om og udveksle data.` API'er `fungerer som broer,` der tillader forskellige softwareapplikationer at kommunikere og interagere med hinanden på en sikker og struktureret måde.
 
 1. API (Application Programming Interface) - interaktion mellem komponenter
 2. Tjener - Metafor
+
+   !['API'](https://i0.wp.com/blog.codeanalogies.com/wp-content/uploads/2020/01/image-2.png?resize=730%2C458&ssl=1)
+
 3. Transfer over HTTP. (Database / other API)
    !['API'](https://learn.g2.com/hubfs/G2CM_FI167_Learn_Article_Images_%5BAPI%5D_Infographic_V1a.png)
 4. User --> request data --> internet --> server --> response data
@@ -100,7 +107,7 @@ const port = 3000;
 
 // Definer en HTTP GET-handler for '/weather' endpointet
 // En del af det uniforme interface i REST. Vi definerer en ressource ('/weather')
-// og en metode til at interagere med den (GET)
+// og et endpoint til at interagere med den (GET)
 app.get('/weather', (req, res) => {
 
     // Dette kunne repræsentere data hentet fra en database
@@ -140,6 +147,38 @@ axios.get('http://localhost:3000/weather')
         console.error('An error occurred:', error);
     });
 
+### GraphQL API
+
+// Send en HTTP POST-anmodning til vores '/graphql' endpoint med vores GraphQL-query
+axios.post('http://localhost:4000/graphql', {
+    query: `
+        query {
+            getWeather(location: "Copenhagen") {
+                location
+                temperature
+                condition
+            }
+        }
+    `
+})
+
+### SOAP API
+
+POST /WeatherService HTTP/1.1
+Host: www.example.com
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://www.example.com/GetWeather"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.example.com/">
+  <SOAP-ENV:Body>
+    <ns1:GetWeather>
+      <ns1:Location>Copenhagen</ns1:Location>
+    </ns1:GetWeather>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
 ```
 
 Link til PlannerProjekt i Angular <https://github.com/Kastholm/AngularPlanner>
@@ -158,7 +197,7 @@ Du bør bruge eksempler fra egne projekter og opgaver som eksempler i din gennem
 
 ### Hvad er JSON
 
-JSON (JavaScript Object Notation) er et letvægts dataudvekslingsformat, der bruges til at repræsentere strukturerede data. JSON bruges bredt i World Wide Web-konteksten, især til dataintegration på websites. JSON's popularitet skyldes dens enkle syntaks, læsbarhed og evne til at repræsentere komplekse datastrukturer.
+JSON `(JavaScript Object Notation)` er et `letvægts dataudvekslingsformat,` der bruges til at `repræsentere strukturerede data.` JSON bruges bredt i World Wide Web-konteksten, især til `dataintegration på websites.` JSON's popularitet skyldes dens `enkle syntaks, læsbarhed og evne til at repræsentere komplekse datastrukturer.`
 
 ```
 // Eksempel på et JSON-dokument
@@ -193,11 +232,11 @@ fetch('https://api.example.com/data')
 
 Struktur og syntaks af JSON-dokumenter:
 
-1. JSON-dokumenter består af nøgle-værdi-par, hvor nøglerne er strenge og værdierne kan være forskellige datatyper som tekststrenge, tal, boolean-værdier, lister, eller endda indlejrede JSON-objekter.
-2. JSON-dokumenter er struktureret som hierarkiske træer, der kan indeholde indlejrede objekter og lister af objekter.
-3. Nøgle-værdi-par er adskilt af kolon (:), og parrene er adskilt af komma (,).
-4. Strengværdier skal være anført med dobbelte anførselstegn (""), og tal og booleans er ikke anført.
-5. JSON tillader ikke kommentarer, så alle dele af dokumentet skal være gyldig JSON-syntax.
+1. JSON-dokumenter `består af nøgle-værdi-par,` hvor `nøglerne er strenge` og `værdierne kan være forskellige datatyper som tekststrenge, tal, boolean-værdier, lister, eller endda indlejrede JSON-objekter.`
+2. JSON-dokumenter er struktureret som `hierarkiske træer,` der kan `indeholde indlejrede objekter og lister af objekter.`
+3. Nøgle-værdi-par er `adskilt af kolon (:),` `og parrene er adskilt af komma (,).`
+4. `Strengværdier skal være anført med dobbelte anførselstegn (""), og tal og booleans er ikke anført.`
+5. JSON `tillader ikke kommentarer,` så alle dele af dokumentet skal være gyldig JSON-syntax.
 
 ```
 ## Eksempel
@@ -225,17 +264,16 @@ Tilgå mongoDB database
 
 ### Hvad er XML
 
-XML (Extensible Markup Language) er et markup-sprog, der bruges til at repræsentere struktureret data. Her er en oversigt over, hvad XML er, og hvordan det anvendes i World Wide Web-konteksten med fokus på integration af XML-data på websites:
+XML (Extensible Markup Language) er et `markup-sprog,` der bruges til at `repræsentere struktureret data.`
 
-1. XML er et tekstbaseret format designet til at repræsentere og udveksle data mellem forskellige systemer og platforme.
-2. Det bruger tags til at definere struktur og hierarki af dataelementer.
-3. XML er selvbeskrivende, hvilket betyder, at det indeholder information om både dataens struktur og betydning.
-4. Det er udvidbart, hvilket betyder, at brugere kan definere deres egne tags og struktur for at passe til deres specifikke behov.
+1. XML er et `tekstbaseret format` designet til at `repræsentere og udveksle data mellem forskellige systemer og platforme.`
+2. Det `bruger tags` til at `definere struktur og hierarki af dataelementer.`
+3. Det er `udvidbart,` hvilket betyder, at `brugere kan definere deres egne tags og struktur` for at passe til deres specifikke behov.
 
 ```
 // Prolog der angiver XML version og tegnsæt
 <?xml version="1.0" encoding="UTF-8"?>
-// Roteelement -> indeholder child elementer
+// Rote element -> indeholder child elementer
 <book>
   <title>Harry Potter and the Philosopher's Stone</title>
   <author>J.K. Rowling</author>
@@ -244,9 +282,9 @@ XML (Extensible Markup Language) er et markup-sprog, der bruges til at repræsen
 </book>
 ```
 
-Håndtering af XML-dokumenter i JavaScript:
+`Håndtering af XML-dokumenter i JavaScript:`
 
-JavaScript har ikke en indbygget XML-parser som JSON, men der er forskellige biblioteker og metoder, der kan bruges til at arbejde med XML i JavaScript. Nogle populære metoder inkluderer:
+`JavaScript har ikke en indbygget XML-parser som JSON,` men der er forskellige `biblioteker og metoder,` der kan bruges `til at arbejde med XML i JavaScript.` Nogle populære metoder inkluderer:
 
 DOMParser: En indbygget JavaScript-klasse, der kan bruges til at parse XML-dokumenter og oprette en DOM-struktur.
 Tredjepartsbiblioteker som xml2js og `fast-xml-parser`
@@ -282,13 +320,13 @@ console.log("Genre:", genre);
 
 ### Well-formedness og validitet af XML:
 
-- Well-formedness refererer til, om et XML-dokument følger syntaktiske regler og strukturkrav for at være gyldigt XML. Et well-formed XML-dokument skal overholde følgende regler:
+- `Well-formedness` refererer til, `om et XML-dokument følger syntaktiske regler og strukturkrav for at være gyldigt XML.` Et well-formed XML-dokument skal overholde følgende regler:
 
-1. Hvert starttag skal have et tilsvarende sluttag, f.eks. <element></element>.
-2. Elementer skal være korrekt indlejret, dvs. de skal åbnes og lukkes i den rigtige rækkefølge uden overlap.
-3. Attributværdier skal være anført i anførselstegn, f.eks. attribut="værdi".
-4. Tags og attributter skal være i korrekt casing (stor- og småbogstaver er vigtige).
-5. Specielle tegn skal escapes, f.eks. &lt; for < og &amp; for &.
+1. Hvert `starttag skal have et tilsvarende sluttag,` f.eks. <element></element>.
+2. Elementer skal være korrekt indlejret, dvs. de skal `åbnes og lukkes i den rigtige rækkefølge uden overlap.`
+3. `Attributværdier skal være anført i anførselstegn,` f.eks. attribut="værdi".
+4. `Tags og attributter skal være i korrekt casing` (stor- og småbogstaver er vigtige).
+5. `Specielle tegn skal escapes,` f.eks. &lt; for < og &amp; for &.
 
 - Validitet er et yderligere trin og refererer til, om et XML-dokument overholder et specifikt dokumenttype-definitionsskema (DTD) eller XML-skema. Et validt XML-dokument følger ikke kun syntaktiske regler, men også reglerne og strukturen, der er defineret af skemaet. Dette sikrer, at XML-dokumentet overholder de forventede regler og begrænsninger for dataene.
 
@@ -335,7 +373,7 @@ console.log("Genre:", genre);
 
 2. #### Hvorfor og hvordan dokumenteres et API i forhold til en konventionel backend?
 
-   Dokumentation af et API er afgørende for udviklere, da det giver dem nødvendige oplysninger om, hvordan API'et fungerer og hvordan de kan bruge det korrekt. API-dokumentationen beskriver typisk ressourcer, endpoints, tilladte metoder, dataformater og eventuelle autentificerings- eller autorisationskrav. Dette kan gøres ved at oprette en detaljeret API-reference, der beskriver hver endpoint, dets parametre og forventet svarformat.
+   `Dokumentation af et API er afgørende for udviklere,` da det giver dem `nødvendige oplysninger om, hvordan API'et fungerer` og hvordan de kan `bruge det korrekt.` API-dokumentationen beskriver typisk ressourcer, endpoints, tilladte metoder, dataformater og eventuelle autentificerings- eller autorisationskrav. Dette kan gøres ved at oprette en detaljeret API-reference, der beskriver hver endpoint, dets parametre og forventet svarformat.
 
 ```
 openapi: 3.0.0
@@ -373,6 +411,8 @@ paths:
                     description: Vejrforholdet
 ```
 
+Brug af API
+
 ```
 const axios = require('axios');
 
@@ -396,6 +436,8 @@ axios.get('http://api.example.com/weather', {
   });
 ```
 
+Giver disse oplysninger til API'en
+
 ```
 paths:
   /weather:
@@ -413,7 +455,9 @@ paths:
 
 3. #### Hvordan kan et API anvendes fra JavaScript?
 
-   JavaScript kan bruges til at interagere med et API ved hjælp af AJAX-anmodninger eller moderne fetch API. Ved at bruge disse metoder kan udviklere sende asynkrone anmodninger til API'et og behandle de returnerede data i JavaScript-koden.
+   `JavaScript kan bruges til at interagere med et API ved hjælp af bla. AJAX-anmodninger eller moderne fetch API.` Ved at bruge disse metoder kan udviklere sende asynkrone anmodninger til API'et og behandle de returnerede data i JavaScript-koden.
+
+`HTTP anmodning med AJAX`
 
 ```
 // Opret en ny XMLHttpRequest-forespørgsel
@@ -437,6 +481,8 @@ xhr.onreadystatechange = function () {
 xhr.send();
 ```
 
+`HTTP anmodning med fetch`
+
 ```
 // Udfør en GET-anmodning til API'et ved hjælp af Fetch API
 fetch('https://api.example.com/data')
@@ -451,7 +497,7 @@ fetch('https://api.example.com/data')
 
 4. #### Hvilken dokumentation er nødvendig?
 
-   Vigtig dokumentation for et API inkluderer en API-reference, der beskriver alle tilgængelige endpoints, de accepterede parametre, forventede svarformater og eventuelle autentificerings- eller autorisationskrav. Det kan også være nyttigt at inkludere eksempler på anmodninger og svar for at hjælpe udviklere med at forstå API'ets funktionalitet.
+   `Vigtig dokumentation for et API inkluderer en API-reference,` der beskriver alle tilgængelige endpoints, de accepterede parametre, forventede svarformater og eventuelle autentificerings- eller autorisationskrav. Det kan også være nyttigt at inkludere eksempler på anmodninger og svar for at hjælpe udviklere med at forstå API'ets funktionalitet.
 
 Vigtige elementer, der bør inkluderes i API-dokumentationen:
 
@@ -509,6 +555,76 @@ Vigtige elementer, der bør inkluderes i API-dokumentationen:
 
 ## AJaX, fetch eller Axios brugt med XML
 
+Præsenter en af de nævnte teknologier og dens rolle i dataintegrationen i en moderne webapplikation.
+Din præsentation skal fortælle hvad teknologien er og hvor vi bruger den, og hvordan den bruges. Vi
+interesserede i AjaX i sammenhæng med XML som brugt i JavaScript, både med JavaScript som
+modtager og som afsender.
+Du bør bruge eksempler fra egne projekter og opgaver som eksempler i din gennemgang. Hvis du ikke
+har brugt det vil vi gerne høre hvordan du kunne have brugt det.
+
+#### Hvad er AJAX
+
+AJAX står for Asynchronous JavaScript and XML. Det er en `samling webudviklingsteknikker`, der `bruges på klient-siden for at skabe asynkrone webapplikationer.` Med AJAX kan websider `sende data` til, og `hente data` `fra en server asynkront (i baggrunden)` uden at forstyrre visningen og adfærden af ​​den eksisterende side.
+
+1. Asynchronous: Betyder, at `kommunikationen mellem klienten (webbrowser) og serveren kan ske uafhængigt af brugerens interaktioner med websiden.` Dette betyder, at data kan opdateres, sendes eller hentes i baggrunden, hvilket forhindrer nødvendigheden af ​​at genindlæse hele siden.
+
+2. JavaScript: JavaScript er det programmeringssprog, der bruges til at implementere AJAX på websiden. JavaScript-kode er ansvarlig for at sende HTTP-anmodninger til serveren og behandle de svar, det modtager.
+
+3. And.
+
+4. XML: eXtensible Markup Language. Tidligt i AJAX' historie blev data ofte sendt mellem klienten og serveren som XML. I dag bruges imidlertid ofte andre dataformater, såsom `JSON` (JavaScript Object Notation), på grund af dets større fleksibilitet.
+
+#### Eksempel.
+
+!['API'](https://bsscommerce.com/blog/wp-content/uploads/2020/05/ajax-compare-with-normal-theme.jpg)
+
+Webapplikation - Brugeren kan indtaste en by, og applikationen vil vise det aktuelle vejr for den by.
+
+`Uden AJAX ville hele siden skulle genindlæses,` hver gang brugeren ville kontrollere vejret for en anden by. Med AJAX kan siden i stedet sende en anmodning til serveren, når brugeren indtaster en ny by, og opdatere kun den del af siden, der viser vejrinformationen.
+
+```
+function getWeather(city) {
+  fetch('https://api.weather.com/v1/' + city)
+    .then(response => response.xml())  // Forudsat at serveren returnerer XML
+    .then(data => {
+      // Opdater DOM-elementet med det nye vejr
+      document.getElementById('weather').innerHTML = data;
+    });
+}
+
+<weather>
+  <temperature>20</temperature>
+  <humidity>80</humidity>
+  <windSpeed>5</windSpeed>
+</weather>
+```
+
+Her defineres en funktion, getWeather, som `bruger fetch API'en til at sende en HTTP GET-anmodning til en vejr-API.` fetch `returnerer et Promise,` der løser til serverens respons. Vi bruger derefter `.then metoden til at håndtere dette Promise.`
+
+Vi bruger `response.xml() for at parse responsen som XML` - dette er forudsat, at serveren returnerer data i XML-format. I mange moderne applikationer vil data ofte blive `returneret i JSON-format i stedet,` hvor vi ville bruge `response.json().`
+
+Derefter bruges en anden `.then metode til at håndtere dataen,` vi har fået fra serveren. Her antager vi, at der er et `element i vores HTML med id'et 'weather'`, og vi `opdaterer dets indhold` med det nye vejrdata.
+
+#### Fremvis app - database
+
 ### Problem 7
 
 ## AJaX, fetch eller Axios brugt med JSON
+
+```
+function getWeather(city) {
+  fetch('https://api.weather.com/v1/' + city)
+    .then(response => response.json())  // Forudsat at serveren returnerer JSON
+    .then(data => {
+      // Opdater DOM-elementet med det nye vejr
+      document.getElementById('weather').innerHTML = data;
+    });
+}
+
+{
+  "temperature": 20,
+  "humidity": 80,
+  "windSpeed": 5
+}
+
+```

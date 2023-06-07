@@ -367,6 +367,16 @@ console.log("Genre:", genre);
 
 ## Udviklingsprocessen omkring Dataintegration
 
+Der ønskes en præsentation med gennemgang af udviklingsprocessen omkring anvendelse af eksterne
+data i en webapplikation.
+Hvad er et API, hvorfor og hvordan er det dokumenteret i forhold til en konventionel backend, og
+hvordan kan det anvendes fra JavaScript. Hvilken dokumentation er nødvendig, og hvad kan vi som
+udviklere evt gøre for at undersøge modtagne data, hvis dokumentationen er mangelfuld.
+Fragmenter af kode til illustration af dine overvejelser skal være en del af præsentationen.
+Du bør bruge eksempler fra egne projekter og opgaver som eksempler i din gennemgang.
+© nml, 2023-04-29 6/8
+
+
 1. #### API'er og hvordan de fungerer
 
 - Se problem 1

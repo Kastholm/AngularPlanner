@@ -91,7 +91,7 @@ Representational State Transfer, er et arkitektonisk mønster for at bygge netv�
 2. `Statelessness:` `uafhængige definerede anmodninger endpoints`
 3. `Uniform Interface:` `standardisered metoder / HTTP Requests / Get method`
 
-- Vis punkt1 REST Api - Forskel på SOAP og GQL
+- Vis punkt1 REST Api - Forskel på SOAP og GQL - Datasikkerhed
 
 ```
 // Importer Express.js-biblioteket

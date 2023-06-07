@@ -91,6 +91,8 @@ Representational State Transfer, er et arkitektonisk mønster for at bygge netv�
 2. `Statelessness:` `uafhængige definerede anmodninger endpoints`
 3. `Uniform Interface:` `standardisered metoder / HTTP Requests / Get method`
 
+- Vis punkt1 REST Api - Forskel på SOAP og GQL
+
 ```
 // Importer Express.js-biblioteket
 // Express.js er en web server ramme, der giver mulighed for at bygge HTTP servere i Node.js

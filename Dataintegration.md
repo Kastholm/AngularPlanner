@@ -87,11 +87,9 @@ Du bør bruge eksempler fra egne projekter og opgaver som eksempler i din gennem
 
 Representational State Transfer, er et arkitektonisk mønster for at bygge netværksapplikationer, især web services. Et RESTful interface (eller API) er kendetegnet ved følgende egenskaber:
 
-1. `Client-Server Architecture:` Axios (klienten) anmoder om data, og Express.js (serveren) leverer det.
-2. `Statelessness:` Hver anmodning indeholder alle nødvendige informationer og er uafhængig af andre anmodninger.
-3. `Uniform Interface:` Du bruger standard HTTP GET-metode til at anmode om vejrdata fra en klart defineret URL.
-   RESTful API, der følger REST-principperne:
-   Fordi den bruger HTTP-protokoller (GET) til at oprette en stateless kommunikation mellem en klient (axios) og en server (Express.js), som udveksler data (vejrdata) om en bestemt ressource (/weather).
+1. `Client-Server Architecture:` `Klient & Server Adskilt.` `Anmod om data, send data`
+2. `Statelessness:` `uafhængige definerede anmodninger endpoints`
+3. `Uniform Interface:` `standardisered metoder / HTTP Requests / Get method`
 
 ```
 // Importer Express.js-biblioteket
